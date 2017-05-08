@@ -7,7 +7,7 @@ module.exports = NodeHelper.create({
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification === 'GET_TICKER') {
+    if (notification === 'get_ticker') {
       this.getTickers(payload);
     }
   },
@@ -16,8 +16,7 @@ module.exports = NodeHelper.create({
     var self = this;
     request({ url: url, method: 'GET' }, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        var result = JSON.parse(body);
-        self.sendSocketNotification('GOT_RESULT', result);
+        self.sendSocketNotification('got_result', JSON.parse(body));
       }
     });
   },

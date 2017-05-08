@@ -1,11 +1,7 @@
-'use strict';
-
 Module.register("MMM-cryptocurrency", {
-
   result: {},
   defaults: {
     currency: 'bitcoin',
-    //"AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "IDR", "INR", "JPY", "KRW", "MXN", "RUB"
     conversion: 'USD'
   },
 
@@ -14,11 +10,15 @@ Module.register("MMM-cryptocurrency", {
     this.scheduleUpdate();
   },
 
+  getStyles: function() {
+    return ["MMM-cryptocurrency.css"];
+  },
+
   getTicker: function () {
     var currency = this.config.currency;
     var conversion = this.config.conversion;
     var url = 'https://api.coinmarketcap.com/v1/ticker/' + currency + '/?convert=' + conversion;
-    this.sendSocketNotification('GET_TICKER', url);
+    this.sendSocketNotification('get_ticker', url);
   },
 
   scheduleUpdate: function() {
@@ -32,10 +32,9 @@ Module.register("MMM-cryptocurrency", {
 
   getDom: function() {
     var wrapper = document.createElement("ticker");
-    wrapper.className = 'medium bright';
-    wrapper.className = 'ticker';
     var data = this.result;
     var textElement =  document.createElement("span");
+    textElement.className = 'currency';
     var text = this.config.currency + ': ';
     var lastPrice = data.price_usd;
     if (lastPrice) {
@@ -49,7 +48,7 @@ Module.register("MMM-cryptocurrency", {
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification === "GOT_RESULT") {
+    if (notification === "got_result") {
       // Get first element of the array
       this.result = payload[0];
       this.updateDom();
