@@ -1,4 +1,4 @@
-# MMM-cryptocurrecny
+# MMM-cryptocurrency
 A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used to get real-time values of crypto currencies.
 
 ## Installation
@@ -37,8 +37,8 @@ Data are provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 
 ## Feedback
 It's my first module here after that I built a MagicMirror. I'm so proud of it and I have found a lot of interesting modules, including one similar to this, based on Bitcoin only <a href="https://github.com/valmassoi/MMM-bitcoin">MMM-bitcoin</a>.
-I am open to work on this project and to expand it to add other interesting features, and a bit of cool style too.
-Leave me some feedback in the forum. Thank you!
+<br>I am open to work on this project and to expand it to add other interesting features, and a bit of cool style too.
+<br>Leave me some feedback in the forum. Thank you!
 
 
 The MIT License (MIT)
