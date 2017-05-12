@@ -21,7 +21,7 @@ Here is an example of an entry in `config.js`
 	module: "MMM-cryptocurrency",
 	position: "top_right",
 	config: {
-		currency: 'ethereum',
+		currency: ['ethereum', 'bitcoin'],
 		conversion: 'USD'
 	}
 }

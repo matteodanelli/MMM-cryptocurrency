@@ -1,3 +1,9 @@
 .currency {
 	color: white;
 }
+.mmm-cryptocurrency > tr {
+	padding-bottom: 5px;
+}
+.mmm-cryptocurrency > tr > td, .mmm-cryptocurrency > tr > th {
+	padding-left: 20px;
+}
