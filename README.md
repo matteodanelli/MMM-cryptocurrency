@@ -12,7 +12,7 @@ The entry in `config.js` can include the following options:
 
 |Option|Description|
 |---|---|
-|`currency`|The currency you want to display.<br>**Type:** `string`<br>**Default:** <i>bitcoin</i>|
+|`currency`|One or more currencies you want to display.<br>**Type:** `string`<br>**Default:** <i>bitcoin</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
 
 Here is an example of an entry in `config.js`
@@ -39,6 +39,9 @@ Data are provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 It's my first module here after that I built a MagicMirror. I'm so proud of it and I have found a lot of interesting modules, including one similar to this, based on Bitcoin only <a href="https://github.com/valmassoi/MMM-bitcoin">MMM-bitcoin</a>.
 <br>I am open to work on this project and to expand it to add other interesting features, and a bit of cool style too.
 <br>Leave me some feedback in the forum. Thank you!
+
+## Contributors
+<a href="https://github.com/Klizzy/MMM-cryptocurrency">Klizzy</a> for translations and multiple currencies.
 
 
 The MIT License (MIT)
