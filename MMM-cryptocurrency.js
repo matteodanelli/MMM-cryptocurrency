@@ -1,7 +1,7 @@
 Module.register("MMM-cryptocurrency", {
     result: {},
     defaults: {
-        currency: ['bitcoin', 'ethereum'],
+        currency: ['bitcoin'],
         conversion: 'USD',
         displayLongNames: false
     },
@@ -17,6 +17,8 @@ Module.register("MMM-cryptocurrency", {
 
     getTicker: function () {
         var conversion = this.config.conversion;
+
+        // increase the limit at the end to choose from more currencies
         var url = 'https://api.coinmarketcap.com/v1/ticker/?convert='+conversion+'&limit=10';
         this.sendSocketNotification('get_ticker', url);
     },
@@ -39,6 +41,7 @@ Module.register("MMM-cryptocurrency", {
         tableHead.className = 'header-row';
 
         // Using the MM Translate function to translate the strings
+        // just add another translation key to extend the table head
         var tableHeadValues = [
             this.translate("CURRENCY"),
             this.translate('PRICE'),
@@ -72,6 +75,7 @@ Module.register("MMM-cryptocurrency", {
             // rounding the price and adds the currency string
             var formattedPrice = Math.round(oneCurrency['price_'+rightCurrencyFormat])+' '+this.config.conversion;
 
+            // add another value to this array to add additional data
             var tdValues = [
                 name,
                 formattedPrice,
@@ -93,29 +97,36 @@ Module.register("MMM-cryptocurrency", {
     socketNotificationReceived: function (notification, payload) {
         if (notification === "got_result") {
 
-            this.result = this.getWantedCurrencys(this.config.currency, payload);
+            this.result = this.getWantedCurrencies(this.config.currency, payload);
             this.updateDom();
         }
     },
 
-    getWantedCurrencys: function (wantedCurrencys, apiResult) {
+    /**
+     * Returns the configured currencies
+     *
+     * @param wantedCurrencies
+     * @param apiResult
+     * @returns {Array}
+     */
+    getWantedCurrencies: function (wantedCurrencies, apiResult) {
 
-        // get wanted currencys from config and loop trough them
+        // get wanted Currencies from config and loop trough them
 
-        var filteredCurrencys = [];
+        var filteredCurrencies = [];
         // loop trough whole api result
         for (var i = 0; i < apiResult.length; i++){
             var singleCurrency = apiResult[i];
             // loop trough currency's specified in config
-            for (var c = 0; c < wantedCurrencys.length; c++){
-                if(singleCurrency.id == wantedCurrencys[c]){
+            for (var c = 0; c < wantedCurrencies.length; c++){
+                if(singleCurrency.id == wantedCurrencies[c]){
                     // add them to our wanted list
-                    filteredCurrencys.push(singleCurrency)
+                    filteredCurrencies.push(singleCurrency)
                 }
             }
         }
 
-        return filteredCurrencys;
+        return filteredCurrencies;
 
     },
 
