@@ -14,7 +14,7 @@ The entry in `config.js` can include the following options:
 |---|---|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
-|`displayLongNames`| Option to change the Name of the currency (eg. Bitcoin / BTC ). <br> **Type** boolean |
+|`displayLongNames`| Option to change the Name of the currency (eg. Bitcoin / BTC ). <br> **Type** boolean <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
