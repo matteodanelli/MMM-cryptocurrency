@@ -14,7 +14,7 @@ The entry in `config.js` can include the following options:
 |---|---|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
-|`displayLongNames`| Option to change the Name of the currency (eg. Bitcoin / BTC ). <br> **Type** boolean <br> **Default** <i>false</i> |
+|`displayLongNames`| Option that show full name of the currecny or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -33,9 +33,9 @@ Here is an example of an entry in `config.js`
 
 
 ## Notes
-Data is provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
+Data provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 - Endpoints update every 5 minutes.
-- Currently you can only display Currencies which are listed within the Top-10 at the Website.
+- Currently you can only display currencies listed within top-10 on coinmarketcap.com.
 
 
 ## Feedback
