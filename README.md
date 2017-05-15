@@ -12,8 +12,9 @@ The entry in `config.js` can include the following options:
 
 |Option|Description|
 |---|---|
-|`currency`|One or more currencies you want to display.<br>**Type:** `string`<br>**Default:** <i>bitcoin</i>|
+|`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
+|`displayLongNames`| Option to change the Name of the currency (eg. Bitcoin / BTC ). <br> **Type** boolean <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -32,8 +33,10 @@ Here is an example of an entry in `config.js`
 
 
 ## Notes
-Data are provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
+Data is provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 - Endpoints update every 5 minutes.
+- Currently you can only display Currencies which are listed within the Top-10 at the Website.
+
 
 ## Feedback
 It's my first module here after that I built a MagicMirror. I'm so proud of it and I have found a lot of interesting modules, including one similar to this, based on Bitcoin only <a href="https://github.com/valmassoi/MMM-bitcoin">MMM-bitcoin</a>.
