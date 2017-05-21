@@ -3,7 +3,8 @@ Module.register("MMM-cryptocurrency", {
     defaults: {
         currency: ['bitcoin'],
         conversion: 'USD',
-        displayLongNames: false
+        displayLongNames: false,
+        displayIconView: true
     },
 
     start: function () {
@@ -33,6 +34,11 @@ Module.register("MMM-cryptocurrency", {
     },
 
     getDom: function () {
+
+        if(this.config.displayIconView){
+            return this.buildIconView(this.result);
+        }
+
         var wrapper = document.createElement("table");
         wrapper.className = 'small mmm-cryptocurrency';
         var data = this.result;
@@ -61,13 +67,10 @@ Module.register("MMM-cryptocurrency", {
             } else {
                 name = oneCurrency.symbol;
             }
-            var rightCurrencyFormat = this.config.conversion.toLowerCase();
-            // rounding the price and adds the currency string
-            var formattedPrice = Math.round(oneCurrency['price_'+rightCurrencyFormat] * 100) / 100+' '+this.config.conversion;
-            // add another value to this array to add additional data
+
             var tdValues = [
                 name,
-                formattedPrice,
+                oneCurrency.price,
                 oneCurrency.percent_change_24h+'%'
             ];
             for (var c = 0; c < tdValues.length; c++) {
@@ -101,11 +104,81 @@ Module.register("MMM-cryptocurrency", {
                 var userCurrency = chosenCurrencies[i];
                 var remoteCurrency = apiResult[j];
                 if (userCurrency == remoteCurrency.id) {
+                    remoteCurrency = this.formatPrice(remoteCurrency);
                     filteredCurrencies.push(remoteCurrency);
                 }
             }
         }
         return filteredCurrencies;
+    },
+
+    /**
+     * Formats the price of the API result and adds it to the object with simply .price as key
+     * instead of price_eur
+     * @param apiResult
+     * @returns {*}
+     */
+    formatPrice: function (apiResult) {
+
+        var rightCurrencyFormat = this.config.conversion.toLowerCase();
+        // rounding the price and adds the currency string
+        apiResult['price'] = Math.round(apiResult['price_' + rightCurrencyFormat] * 100) / 100 + ' ' + this.config.conversion;
+
+        return apiResult;
+    },
+
+    /**
+     * Creates the icon view type
+     * @param apiResult
+     * @returns {Element}
+     */
+    buildIconView: function (apiResult) {
+
+        var table = document.createElement('table');
+        table.className = ' mmm-cryptocurrency-icon';
+
+        for (var j = 0; j < apiResult.length; j++){
+
+            var tr = document.createElement('tr');
+            tr.className = 'icon-row';
+
+            if(this.imageExists(apiResult[j].id)){
+                var td = document.createElement('td');
+                td.className = 'icon-field';
+                var img = new Image();
+                img.src = '/modules/MMM-cryptocurrency/img/'+apiResult[j].id+'.png';
+                img.setAttribute('width', '50px');
+                img.setAttribute('height', '50px');
+                td.appendChild(img);
+                var td2 = document.createElement('td');
+                td2.className = 'price';
+                var span = document.createElement('span');
+                span.innerHTML = apiResult[j].price;
+                td2.appendChild(span);
+                tr.appendChild(td);
+                tr.appendChild(td2);
+            }
+
+            table.appendChild(tr);
+
+        }
+
+
+        return table;
+
+    },
+
+    imageExists: function(currencyName){
+
+    var imgPath = '/modules/MMM-cryptocurrency/img/'+currencyName+'.png';
+
+    var http = new XMLHttpRequest();
+
+    http.open('HEAD', imgPath, false);
+    http.send();
+
+    return http.status != 404;
+
     },
 
     /**

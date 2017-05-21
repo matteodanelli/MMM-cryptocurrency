@@ -1,9 +1,22 @@
 .currency {
-	color: white;
+    color: white;
 }
+
 .mmm-cryptocurrency > tr {
-	padding-bottom: 8px;
+    padding-bottom: 8px;
 }
+
 .mmm-cryptocurrency > tr > td, .mmm-cryptocurrency > tr > th {
-	padding-left: 32px;
+    padding-left: 32px;
 }
+
+.mmm-cryptocurrency-icon > tr > td > img, span{
+    vertical-align: middle;
+}
+.mmm-cryptocurrency-icon > tr > td.price {
+    text-align: right;
+}
+.mmm-cryptocurrency-icon > tr > td {
+    padding-bottom: 10px;
+}
+
