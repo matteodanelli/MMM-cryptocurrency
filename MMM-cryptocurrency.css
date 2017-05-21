@@ -8,15 +8,25 @@
 
 .mmm-cryptocurrency > tr > td, .mmm-cryptocurrency > tr > th {
     padding-left: 32px;
+    padding-bottom: 5px;
 }
 
 .mmm-cryptocurrency-icon > tr > td > img, span{
     vertical-align: middle;
 }
-.mmm-cryptocurrency-icon > tr > td.price {
-    text-align: right;
-}
 .mmm-cryptocurrency-icon > tr > td {
     padding-bottom: 10px;
+    text-align: right;
+}
+.mmm-cryptocurrency tr.header-row th {
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.mmm-cryptocurrency *:first-child {
+    padding-left: 0;
+}
+.mmm-cryptocurrency-icon .icon-field {
+    padding-right: 10px;
 }
 

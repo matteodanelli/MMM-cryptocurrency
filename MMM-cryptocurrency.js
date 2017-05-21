@@ -4,7 +4,8 @@ Module.register("MMM-cryptocurrency", {
         currency: ['bitcoin'],
         conversion: 'USD',
         displayLongNames: false,
-        displayIconView: false
+        displayTpe: 'detail',
+        logoHeaderText: 'Cryptocurrencies'
     },
 
     start: function () {
@@ -20,7 +21,7 @@ Module.register("MMM-cryptocurrency", {
         var conversion = this.config.conversion;
 
         // increase the limit at the end to choose from more currencies
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert='+conversion+'&limit=10';
+        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=10';
         this.sendSocketNotification('get_ticker', url);
     },
 
@@ -33,9 +34,14 @@ Module.register("MMM-cryptocurrency", {
         }, delay);
     },
 
+    /**
+     * Creates the module output
+     *
+     * @returns {*}
+     */
     getDom: function () {
 
-        if(this.config.displayIconView){
+        if (this.config.displayType == 'logo') {
             return this.buildIconView(this.result);
         }
 
@@ -71,7 +77,7 @@ Module.register("MMM-cryptocurrency", {
             var tdValues = [
                 name,
                 oneCurrency.price,
-                oneCurrency.percent_change_24h+'%'
+                oneCurrency.percent_change_24h + '%'
             ];
             for (var c = 0; c < tdValues.length; c++) {
                 var tdWrapper = document.createElement("td");
@@ -99,8 +105,8 @@ Module.register("MMM-cryptocurrency", {
      */
     getWantedCurrencies: function (chosenCurrencies, apiResult) {
         var filteredCurrencies = [];
-        for (var i = 0; i < chosenCurrencies.length; i++){
-            for (var j = 0; j < apiResult.length; j++){
+        for (var i = 0; i < chosenCurrencies.length; i++) {
+            for (var j = 0; j < apiResult.length; j++) {
                 var userCurrency = chosenCurrencies[i];
                 var remoteCurrency = apiResult[j];
                 if (userCurrency == remoteCurrency.id) {
@@ -115,6 +121,7 @@ Module.register("MMM-cryptocurrency", {
     /**
      * Formats the price of the API result and adds it to the object with simply .price as key
      * instead of price_eur
+     *
      * @param apiResult
      * @returns {*}
      */
@@ -129,55 +136,73 @@ Module.register("MMM-cryptocurrency", {
 
     /**
      * Creates the icon view type
+     *
      * @param apiResult
      * @returns {Element}
      */
     buildIconView: function (apiResult) {
+        var wrapper = document.createElement('div');
+        var header = document.createElement('header');
+        header.className = 'module-header';
+        header.innerHTML = this.config.logoHeaderText;
+
+        wrapper.appendChild(header);
 
         var table = document.createElement('table');
-        table.className = ' mmm-cryptocurrency-icon';
+        table.className = 'medium mmm-cryptocurrency-icon';
 
-        for (var j = 0; j < apiResult.length; j++){
+        for (var j = 0; j < apiResult.length; j++) {
 
             var tr = document.createElement('tr');
             tr.className = 'icon-row';
 
-            if(this.imageExists(apiResult[j].id)){
-                var td = document.createElement('td');
-                td.className = 'icon-field';
-                var img = new Image();
-                img.src = '/modules/MMM-cryptocurrency/img/'+apiResult[j].id+'.png';
-                img.setAttribute('width', '50px');
-                img.setAttribute('height', '50px');
-                td.appendChild(img);
-                var td2 = document.createElement('td');
-                td2.className = 'price';
-                var span = document.createElement('span');
-                span.innerHTML = apiResult[j].price;
-                td2.appendChild(span);
-                tr.appendChild(td);
-                tr.appendChild(td2);
+            var logoWrapper = document.createElement('td');
+            logoWrapper.className = 'icon-field';
+
+            if (this.imageExists(apiResult[j].id)) {
+                var logo = new Image();
+                logo.src = '/MMM-cryptocurrency/' + apiResult[j].id + '.png';
+                logo.setAttribute('width', '50px');
+                logo.setAttribute('height', '50px');
+                logoWrapper.appendChild(logo);
+            } else {
+                this.sendNotification('SHOW_ALERT', {timer: 5000, title:'MMM-cryptocurrency', message:'' +
+                this.translate("IMAGE")+' '+apiResult[j].id+'.png '+this.translate("NOTFOUND")+' /MMM-cryptocurrency/public'});
             }
+
+            var priceWrapper = document.createElement('td');
+            priceWrapper.className = 'price';
+            var price = document.createElement('price');
+            price.innerHTML = apiResult[j].price;
+            priceWrapper.appendChild(price);
+            tr.appendChild(logoWrapper);
+            tr.appendChild(priceWrapper);
 
             table.appendChild(tr);
 
         }
+        wrapper.appendChild(table);
 
-
-        return table;
+        return wrapper;
 
     },
 
-    imageExists: function(currencyName){
+    /**
+     * Checks if an image with the passed name exists
+     *
+     * @param currencyName
+     * @returns {boolean}
+     */
+    imageExists: function (currencyName) {
 
-    var imgPath = '/modules/MMM-cryptocurrency/img/'+currencyName+'.png';
+        var imgPath = '/MMM-cryptocurrency/' + currencyName + '.png';
 
-    var http = new XMLHttpRequest();
+        var http = new XMLHttpRequest();
 
-    http.open('HEAD', imgPath, false);
-    http.send();
+        http.open('HEAD', imgPath, false);
+        http.send();
 
-    return http.status != 404;
+        return http.status != 404;
 
     },
 
