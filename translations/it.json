@@ -1,7 +1,7 @@
 {
   "CURRENCY": "Moneta",
   "PRICE": "Prezzo",
-  "CHANGE": "% differenza (24h)",
   "IMAGE": "Image",
-  "NOTFOUND": "not found in"
+  "NOTFOUND": "not found in",
+  "CHANGE": "% differenza"
 }

@@ -1,7 +1,7 @@
 {
   "CURRENCY": "Currency",
   "PRICE": "Price",
-  "CHANGE": "% Change (24h)",
   "IMAGE": "Image",
-  "NOTFOUND": "not found in"
+  "NOTFOUND": "not found in",
+  "CHANGE": "% Change"
 }
