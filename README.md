@@ -14,7 +14,8 @@ The entry in `config.js` can include the following options:
 |---|---|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
-|`displayLongNames`| Option that show full name of the currecny or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
+|`displayLongNames`| Option that show full name of the currency or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
+|`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -23,7 +24,8 @@ Here is an example of an entry in `config.js`
 	position: "top_right",
 	config: {
 		currency: ['ethereum', 'bitcoin'],
-		conversion: 'USD'
+		conversion: 'USD',
+		headers: ['change24h', 'change1h', 'change7d']
 	}
 }
 ```

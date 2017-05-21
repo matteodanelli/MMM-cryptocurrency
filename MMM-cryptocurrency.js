@@ -3,7 +3,8 @@ Module.register("MMM-cryptocurrency", {
     defaults: {
         currency: ['bitcoin'],
         conversion: 'USD',
-        displayLongNames: false
+        displayLongNames: false,
+        headers: ['change1h', 'change24h', 'change7d']
     },
 
     start: function () {
@@ -33,46 +34,56 @@ Module.register("MMM-cryptocurrency", {
     },
 
     getDom: function () {
+        var data = this.result;
+
         var wrapper = document.createElement("table");
         wrapper.className = 'small mmm-cryptocurrency';
-        var data = this.result;
-        var tableHead = document.createElement("tr");
-        tableHead.className = 'header-row';
 
-        var tableHeadValues = [
+        var tableHeader = document.createElement("tr");
+        tableHeader.className = 'header-row';
+
+        var tableHeaderValues = [
             this.translate("CURRENCY"),
-            this.translate('PRICE'),
-            this.translate('CHANGE')
+            this.translate('PRICE')
         ];
+        this.config.headers.includes('change1h') && tableHeaderValues.push(this.translate('CHANGE') + ' (1h)');
+        this.config.headers.includes('change24h') && tableHeaderValues.push(this.translate('CHANGE') + ' (24h)');
+        this.config.headers.includes('change7d') && tableHeaderValues.push(this.translate('CHANGE') + ' (7d)');
 
-        for (var thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
+        for (var i = 0; i < tableHeaderValues.length; i++) {
             var tableHeadSetup = document.createElement("th");
-            tableHeadSetup.innerHTML = tableHeadValues[thCounter];
-            tableHead.appendChild(tableHeadSetup);
+            tableHeadSetup.innerHTML = tableHeaderValues[i];
+            tableHeader.appendChild(tableHeadSetup);
         }
-        wrapper.appendChild(tableHead);
+        wrapper.appendChild(tableHeader);
 
-        for (var trCounter = 0; trCounter < data.length; trCounter++) {
-            var oneCurrency = data[trCounter];
+        for (var i = 0; i < data.length; i++) {
+            var currentCurrency = data[i];
             var trWrapper = document.createElement("tr");
             trWrapper.className = 'currency';
+
             if (this.config.displayLongNames) {
-                var name = oneCurrency.name;
+                var name = currentCurrency.name;
             } else {
-                name = oneCurrency.symbol;
+                name = currentCurrency.symbol;
             }
+            // Build object key to get proper rounding
             var rightCurrencyFormat = this.config.conversion.toLowerCase();
-            // rounding the price and adds the currency string
-            var formattedPrice = Math.round(oneCurrency['price_'+rightCurrencyFormat] * 100) / 100+' '+this.config.conversion;
-            // add another value to this array to add additional data
+            // Round the price and adds the currency string
+            var formattedPrice = Math.round(currentCurrency['price_'+rightCurrencyFormat] * 100) / 100+' '+this.config.conversion;
+
+            // Build optional headers using lodash
             var tdValues = [
                 name,
-                formattedPrice,
-                oneCurrency.percent_change_24h+'%'
+                formattedPrice
             ];
-            for (var c = 0; c < tdValues.length; c++) {
+            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_1h + '%');
+            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_24h + '%');
+            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_7d + '%');
+
+            for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement("td");
-                tdWrapper.innerHTML = tdValues[c];
+                tdWrapper.innerHTML = tdValues[j];
                 trWrapper.appendChild(tdWrapper);
             }
             wrapper.appendChild(trWrapper);
