@@ -4,7 +4,7 @@ Module.register("MMM-cryptocurrency", {
         currency: ['bitcoin'],
         conversion: 'USD',
         displayLongNames: false,
-        displayIconView: true
+        displayIconView: false
     },
 
     start: function () {
