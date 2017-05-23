@@ -77,9 +77,9 @@ Module.register("MMM-cryptocurrency", {
                 name,
                 formattedPrice
             ];
-            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_1h + '%');
+            this.config.headers.includes('change1h') && tdValues.push(currentCurrency.percent_change_1h + '%');
             this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_24h + '%');
-            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_7d + '%');
+            this.config.headers.includes('change7d') && tdValues.push(currentCurrency.percent_change_7d + '%');
 
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement("td");
