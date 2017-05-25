@@ -32,12 +32,12 @@ Here is an example of an entry in `config.js`
 }
 ```
 
-## Screenshot
-![Alt text](/MMM-cryptocurrency.png?raw=true "Example screenshot")
-```displayType: 'detail'```
+## Screenshots
+#### Display type: details
+![Screenshot](/MMM-cryptocurrency.png?raw=true "Example screenshot")
 
-![Logo View](/logoView.png?raw=true "displayType: 'logo'")
-```displayType: 'logo'```
+#### Display type: logo
+![Screenshot with logo](/logoView.png?raw=true "displayType: 'logo'")
 
 ## Cryptocurrency Logo
 
