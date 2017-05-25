@@ -4,9 +4,9 @@ Module.register("MMM-cryptocurrency", {
         currency: ['bitcoin'],
         conversion: 'USD',
         displayLongNames: false,
+        headers: [],
         displayTpe: 'detail',
-        logoHeaderText: 'Cryptocurrencies',
-        headers: ['change1h', 'change24h', 'change7d']
+        logoHeaderText: 'Crypto currency',
     },
 
     start: function () {
@@ -35,11 +35,6 @@ Module.register("MMM-cryptocurrency", {
         }, delay);
     },
 
-    /**
-     * Creates the module output
-     *
-     * @returns {*}
-     */
     getDom: function () {
         if (this.config.displayType == 'logo') {
             return this.buildIconView(this.result);
@@ -82,9 +77,9 @@ Module.register("MMM-cryptocurrency", {
                 name,
                 currentCurrency.price,
             ];
-            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_1h + '%');
+            this.config.headers.includes('change1h') && tdValues.push(currentCurrency.percent_change_1h + '%');
             this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_24h + '%');
-            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_7d + '%');
+            this.config.headers.includes('change7d') && tdValues.push(currentCurrency.percent_change_7d + '%');
 
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement("td");
@@ -201,16 +196,11 @@ Module.register("MMM-cryptocurrency", {
      * @returns {boolean}
      */
     imageExists: function (currencyName) {
-
         var imgPath = '/MMM-cryptocurrency/' + currencyName + '.png';
-
         var http = new XMLHttpRequest();
-
         http.open('HEAD', imgPath, false);
         http.send();
-
         return http.status != 404;
-
     },
 
     /**
