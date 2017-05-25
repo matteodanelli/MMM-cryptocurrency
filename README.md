@@ -37,7 +37,7 @@ Here is an example of an entry in `config.js`
 ```displayType: 'detail'```
 
 ![Logo View](/logoView.png?raw=true "displayType: 'logo'")
-``displayType: 'logo'``
+```displayType: 'logo'```
 
 ## Cryptocurrency Logo
 
