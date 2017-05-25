@@ -1,5 +1,7 @@
 {
   "CURRENCY": "Währung",
   "PRICE": "Preis",
+  "IMAGE": "Bild",
+  "NOTFOUND": "existiert nicht in",
   "CHANGE": "% Änderung"
 }

@@ -13,8 +13,10 @@ The entry in `config.js` can include the following options:
 |Option|Description|
 |---|---|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
-|`conversion`|The currency used to convert crypto currency value.<br>**Type:** One of the following: `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
+|`conversion`|The currency used to convert crypto currency value.<br>**Type:** `string`<br>**Options:** `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
 |`displayLongNames`| Option that show full name of the currency or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
+|`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo`<br/>**Default:** <i>detail</i>
+|`logoHeaderText`| Defines the headline text if `displayType: logo` is set.<br/>**Type:** `string`<br>**Default:** <i>Crypto currency</i>
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 
 Here is an example of an entry in `config.js`
@@ -32,7 +34,24 @@ Here is an example of an entry in `config.js`
 
 ## Screenshot
 ![Alt text](/MMM-cryptocurrency.png?raw=true "Example screenshot")
+```displayType: 'detail'```
 
+![Logo View](/logoView.png?raw=true "displayType: 'logo'")
+``displayType: 'logo'``
+
+## Cryptocurrency Logo
+
+Logo provided only for the following currencies:
+- Bitcoin
+- Ethereum
+- Ripple
+
+Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
+- Add `'litecoin'` to the currency module config
+- Create the logo (png, 50x50px)
+- Name the file `litecoin.png`
+- Put it in the `/public`directory of the module
+- Restart MagicMirror
 
 ## Notes
 Data provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.

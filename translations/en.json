@@ -1,5 +1,7 @@
 {
   "CURRENCY": "Currency",
   "PRICE": "Price",
+  "IMAGE": "Image",
+  "NOTFOUND": "not found in",
   "CHANGE": "% Change"
 }
