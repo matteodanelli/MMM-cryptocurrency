@@ -18,6 +18,7 @@ The entry in `config.js` can include the following options:
 |`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo`<br/>**Default:** <i>detail</i>
 |`logoHeaderText`| Defines the headline text if `displayType: logo` is set.<br/>**Type:** `string`<br>**Default:** <i>Crypto currency</i>
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
+|`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -38,6 +39,9 @@ Here is an example of an entry in `config.js`
 
 #### Display type: logo
 ![Screenshot with logo](/logoView.png?raw=true "displayType: 'logo'")
+
+#### Display type: logo + showGraphs
+![Screenshot with logo](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
 
 ## Cryptocurrency Logo
 
