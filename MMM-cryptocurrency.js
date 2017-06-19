@@ -6,8 +6,18 @@ Module.register("MMM-cryptocurrency", {
         displayLongNames: false,
         headers: [],
         displayTpe: 'detail',
+        showGraphs: false,
         logoHeaderText: 'Crypto currency',
         significantDigits: 2
+    },
+
+    sparklineIds: {
+        bitcoin: 1,
+        ethereum: 1027,
+        ripple: 52,
+        litecoin: 2,
+        'ethereum-classic': 1321,
+        nem: 873
     },
 
     start: function () {
@@ -201,8 +211,18 @@ Module.register("MMM-cryptocurrency", {
             tr.appendChild(logoWrapper);
             tr.appendChild(priceWrapper);
 
-            table.appendChild(tr);
+            if (this.config.showGraphs) {
+                var graphWrapper = document.createElement('td');
+                graphWrapper.className = 'graph';
+                if (this.sparklineIds[apiResult[j].id]) {
+                    var graph = document.createElement('img');
+                    graph.src = 'https://files.coinmarketcap.com/generated/sparklines/' + this.sparklineIds[apiResult[j].id] + '.png?cachePrevention=' + Math.random();
+                    graphWrapper.appendChild(graph);
+                }
+                tr.appendChild(graphWrapper);
+            }
 
+            table.appendChild(tr);
         }
         wrapper.appendChild(table);
 

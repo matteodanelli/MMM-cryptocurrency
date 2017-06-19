@@ -19,6 +19,7 @@ The entry in `config.js` can include the following options:
 |`logoHeaderText`| Defines the headline text if `displayType: logo` is set.<br/>**Type:** `string`<br>**Default:** <i>Crypto currency</i>
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 |`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>2</i> |
+|`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -42,6 +43,9 @@ Here is an example of an entry in `config.js`
 
 #### Display type: logo + significantDigits=5
 ![Screenshot with logo and 5 significant digits](/logoViewWithSignificantDigits.png?raw=true "displayType: 'logo', significantDigits: 5")
+
+#### Display type: logo + showGraphs
+![Screenshot with logo](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
 
 ## Cryptocurrency Logo
 
@@ -70,6 +74,7 @@ It's my first module here after that I built a MagicMirror. I'm so proud of it a
 
 ## Contributors
 <a href="https://github.com/Klizzy/MMM-cryptocurrency">Klizzy</a> for translations and multiple currencies.
+<a href="https://github.com/olexs/MMM-cryptocurrency"olexs</a> for currencies graphs.
 
 
 The MIT License (MIT)
