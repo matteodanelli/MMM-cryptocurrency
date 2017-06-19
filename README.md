@@ -74,7 +74,7 @@ It's my first module here after that I built a MagicMirror. I'm so proud of it a
 
 ## Contributors
 <a href="https://github.com/Klizzy/MMM-cryptocurrency">Klizzy</a> for translations and multiple currencies.
-<a href="https://github.com/olexs/MMM-cryptocurrency"olexs</a> for currencies graphs.
+<a href="https://github.com/olexs/MMM-cryptocurrency">olexs</a> for currencies graphs and significant digits.
 
 
 The MIT License (MIT)
