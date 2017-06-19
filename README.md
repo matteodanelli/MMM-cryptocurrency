@@ -18,6 +18,7 @@ The entry in `config.js` can include the following options:
 |`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo`<br/>**Default:** <i>detail</i>
 |`logoHeaderText`| Defines the headline text if `displayType: logo` is set.<br/>**Type:** `string`<br>**Default:** <i>Crypto currency</i>
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
+|`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>2</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -39,6 +40,9 @@ Here is an example of an entry in `config.js`
 #### Display type: logo
 ![Screenshot with logo](/logoView.png?raw=true "displayType: 'logo'")
 
+#### Display type: logo + significantDigits=5
+![Screenshot with logo and 5 significant digits](/logoViewWithSignificantDigits.png?raw=true "displayType: 'logo', significantDigits: 5")
+
 ## Cryptocurrency Logo
 
 Logo provided only for the following currencies:
@@ -57,7 +61,7 @@ Feel free to ask for support of your favorite currency. Else, just implement it 
 Data provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 - Endpoints update every 5 minutes.
 - Currently you can only display currencies listed within top-10 on coinmarketcap.com.
-
+- `significantDigits` only has a visible effect when set to 4 or more. It is useful for showing low-value coins (such as Ripple) at a higher resolution, rounding to more digits after the decimal point than the minimal 2. Rounding always keeps at least two digits after the decimal.
 
 ## Feedback
 It's my first module here after that I built a MagicMirror. I'm so proud of it and I have found a lot of interesting modules, including one similar to this, based on Bitcoin only <a href="https://github.com/valmassoi/MMM-bitcoin">MMM-bitcoin</a>.

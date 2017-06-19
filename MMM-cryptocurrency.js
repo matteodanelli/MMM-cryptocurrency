@@ -7,6 +7,7 @@ Module.register("MMM-cryptocurrency", {
         headers: [],
         displayTpe: 'detail',
         logoHeaderText: 'Crypto currency',
+        significantDigits: 2
     },
 
     start: function () {
@@ -128,12 +129,32 @@ Module.register("MMM-cryptocurrency", {
      * @returns {*}
      */
     formatPrice: function (apiResult) {
-
         var rightCurrencyFormat = this.config.conversion.toLowerCase();
-        // rounding the price and adds the currency string
-        apiResult['price'] = Math.round(apiResult['price_' + rightCurrencyFormat] * 100) / 100 + ' ' + this.config.conversion;
+        
+        // rounding the price
+        var unroundedPrice = apiResult['price_' + rightCurrencyFormat];
+        var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length;
+        var requiredDigitsAfterDecimalPoint = Math.max(this.config.significantDigits - digitsBeforeDecimalPoint, 2);
+        var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint);
+        
+        // add the currency string
+        apiResult['price'] = price + ' ' + this.config.conversion;
 
         return apiResult;
+    },
+
+    /**
+     * Rounds a number to a given number of digits after the decimal point
+     * 
+     * @param number
+     * @param precision
+     * @returns {number}
+     */
+    roundNumber: function (number, precision) {
+        var factor = Math.pow(10, precision);
+        var tempNumber = number * factor;
+        var roundedTempNumber = Math.round(tempNumber);
+        return roundedTempNumber / factor;
     },
 
     /**
