@@ -20,6 +20,7 @@ The entry in `config.js` can include the following options:
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 |`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>2</i> |
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
+|`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -47,24 +48,29 @@ Here is an example of an entry in `config.js`
 #### Display type: logo + showGraphs
 ![Screenshot with logo](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
 
+#### Display type: logo + coloredLogos + showGraphs
+![Screenshot with logo](/logoVColoredGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true', coloredLogos: true")
+
 ## Cryptocurrency Logo
 
 Logo provided only for the following currencies:
 - Bitcoin
 - Ethereum
 - Ripple
+- Stratis
+- Nem
 
 Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
 - Add `'litecoin'` to the currency module config
 - Create the logo (png, 50x50px)
 - Name the file `litecoin.png`
-- Put it in the `/public`directory of the module
+- Put it in the `/public/` `black-white/` and `colored` directory of the module
 - Restart MagicMirror
 
 ## Notes
 Data provided by <a href="https://coinmarketcap.com/">coinmarketcap.com</a>.
 - Endpoints update every 5 minutes.
-- Currently you can only display currencies listed within top-10 on coinmarketcap.com.
+- Currently you can only display currencies listed within top-25 on coinmarketcap.com.
 - `significantDigits` only has a visible effect when set to 4 or more. It is useful for showing low-value coins (such as Ripple) at a higher resolution, rounding to more digits after the decimal point than the minimal 2. Rounding always keeps at least two digits after the decimal.
 
 ## Feedback

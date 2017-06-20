@@ -8,7 +8,8 @@ Module.register("MMM-cryptocurrency", {
         displayTpe: 'detail',
         showGraphs: false,
         logoHeaderText: 'Crypto currency',
-        significantDigits: 2
+        significantDigits: 2,
+        coloredLogos: false
     },
 
     sparklineIds: {
@@ -17,7 +18,8 @@ Module.register("MMM-cryptocurrency", {
         ripple: 52,
         litecoin: 2,
         'ethereum-classic': 1321,
-        nem: 873
+        nem: 873,
+        stratis: 1343
     },
 
     start: function () {
@@ -33,7 +35,7 @@ Module.register("MMM-cryptocurrency", {
         var conversion = this.config.conversion;
 
         // increase the limit at the end to choose from more currencies
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=10';
+        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=25';
         this.sendSocketNotification('get_ticker', url);
     },
 
@@ -48,6 +50,7 @@ Module.register("MMM-cryptocurrency", {
 
     getDom: function () {
         if (this.config.displayType == 'logo') {
+            this.folder = (this.config.coloredLogos ? 'colored/' : 'black-white/');
             return this.buildIconView(this.result);
         }
         var data = this.result;
@@ -194,13 +197,14 @@ Module.register("MMM-cryptocurrency", {
 
             if (this.imageExists(apiResult[j].id)) {
                 var logo = new Image();
-                logo.src = '/MMM-cryptocurrency/' + apiResult[j].id + '.png';
+
+                logo.src = '/MMM-cryptocurrency/'+ this.folder + apiResult[j].id + '.png';
                 logo.setAttribute('width', '50px');
                 logo.setAttribute('height', '50px');
                 logoWrapper.appendChild(logo);
             } else {
                 this.sendNotification('SHOW_ALERT', {timer: 5000, title:'MMM-cryptocurrency', message:'' +
-                this.translate("IMAGE")+' '+apiResult[j].id+'.png '+this.translate("NOTFOUND")+' /MMM-cryptocurrency/public'});
+                this.translate("IMAGE")+' '+apiResult[j].id+'.png '+this.translate("NOTFOUND")+' /MMM-cryptocurrency/public/'+this.folder});
             }
 
             var priceWrapper = document.createElement('td');
@@ -217,6 +221,7 @@ Module.register("MMM-cryptocurrency", {
                 if (this.sparklineIds[apiResult[j].id]) {
                     var graph = document.createElement('img');
                     graph.src = 'https://files.coinmarketcap.com/generated/sparklines/' + this.sparklineIds[apiResult[j].id] + '.png?cachePrevention=' + Math.random();
+                    console.log(graph.src);
                     graphWrapper.appendChild(graph);
                 }
                 tr.appendChild(graphWrapper);
@@ -237,7 +242,7 @@ Module.register("MMM-cryptocurrency", {
      * @returns {boolean}
      */
     imageExists: function (currencyName) {
-        var imgPath = '/MMM-cryptocurrency/' + currencyName + '.png';
+        var imgPath = '/MMM-cryptocurrency/'+ this.folder + currencyName + '.png';
         var http = new XMLHttpRequest();
         http.open('HEAD', imgPath, false);
         http.send();
