@@ -49,7 +49,7 @@ Here is an example of an entry in `config.js`
 ![Screenshot with logo](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
 
 #### Display type: logo + coloredLogos + showGraphs
-![Screenshot with logo](/logoVColoredGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true', coloredLogos: true")
+![Screenshot with logo](/logoColoredGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true', coloredLogos: true")
 
 ## Cryptocurrency Logo
 
