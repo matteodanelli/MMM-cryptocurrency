@@ -80,7 +80,7 @@ It's my first module here after that I built a MagicMirror. I'm so proud of it a
 The MIT License (MIT)
 =====================
 
-Copyright © 2016 Sebastian Merkel
+Copyright © 2017 Matteo Danelli
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
