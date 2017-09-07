@@ -22,16 +22,16 @@ Module.register("MMM-cryptocurrency", {
         stratis: 1343
     },
 
-    start: function () {
+    start: function() {
         this.getTicker();
         this.scheduleUpdate();
     },
 
-    getStyles: function () {
+    getStyles: function() {
         return ["MMM-cryptocurrency.css"];
     },
 
-    getTicker: function () {
+    getTicker: function() {
         var conversion = this.config.conversion;
 
         // increase the limit at the end to choose from more currencies
@@ -39,16 +39,16 @@ Module.register("MMM-cryptocurrency", {
         this.sendSocketNotification('get_ticker', url);
     },
 
-    scheduleUpdate: function () {
+    scheduleUpdate: function() {
         var self = this;
         // Refresh time should not be less than 5 minutes
         var delay = 300000;
-        setInterval(function () {
+        setInterval(function() {
             self.getTicker();
         }, delay);
     },
 
-    getDom: function () {
+    getDom: function() {
         if (this.config.displayType == 'logo') {
             this.folder = (this.config.coloredLogos ? 'colored/' : 'black-white/');
             return this.buildIconView(this.result);
@@ -65,10 +65,15 @@ Module.register("MMM-cryptocurrency", {
             this.translate("CURRENCY"),
             this.translate('PRICE')
         ];
-        this.config.headers.includes('change1h') && tableHeaderValues.push(this.translate('CHANGE') + ' (1h)');
-        this.config.headers.includes('change24h') && tableHeaderValues.push(this.translate('CHANGE') + ' (24h)');
-        this.config.headers.includes('change7d') && tableHeaderValues.push(this.translate('CHANGE') + ' (7d)');
-
+        if (this.config.headers.includes('change1h')) {
+            tableHeaderValues.push(this.translate('CHANGE') + ' (1h)');
+        }
+        if (this.config.headers.includes('change24h')) {
+            tableHeaderValues.push(this.translate('CHANGE') + ' (24h)');
+        }
+        if (this.config.headers.includes('change7d')) {
+            tableHeaderValues.push(this.translate('CHANGE') + ' (7d)');
+        }
         for (var i = 0; i < tableHeaderValues.length; i++) {
             var tableHeadSetup = document.createElement("th");
             tableHeadSetup.innerHTML = tableHeaderValues[i];
@@ -76,13 +81,13 @@ Module.register("MMM-cryptocurrency", {
         }
         wrapper.appendChild(tableHeader);
 
-        for (var i = 0; i < data.length; i++) {
+        for (i = 0; i < data.length; i++) {
             var currentCurrency = data[i];
             var trWrapper = document.createElement("tr");
             trWrapper.className = 'currency';
-
+            var name;
             if (this.config.displayLongNames) {
-                var name = currentCurrency.name;
+                name = currentCurrency.name;
             } else {
                 name = currentCurrency.symbol;
             }
@@ -91,9 +96,15 @@ Module.register("MMM-cryptocurrency", {
                 name,
                 currentCurrency.price,
             ];
-            this.config.headers.includes('change1h') && tdValues.push(currentCurrency.percent_change_1h + '%');
-            this.config.headers.includes('change24h') && tdValues.push(currentCurrency.percent_change_24h + '%');
-            this.config.headers.includes('change7d') && tdValues.push(currentCurrency.percent_change_7d + '%');
+            if (this.config.headers.includes('change1h')) {
+                tdValues.push(currentCurrency.percent_change_1h + '%');
+            }
+            if (this.config.headers.includes('change24h')) {
+                tdValues.push(currentCurrency.percent_change_24h + '%');
+            }
+            if (this.config.headers.includes('change7d')) {
+                tdValues.push(currentCurrency.percent_change_7d + '%');
+            }
 
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement("td");
@@ -105,7 +116,7 @@ Module.register("MMM-cryptocurrency", {
         return wrapper;
     },
 
-    socketNotificationReceived: function (notification, payload) {
+    socketNotificationReceived: function(notification, payload) {
         if (notification === "got_result") {
             this.result = this.getWantedCurrencies(this.config.currency, payload);
             this.updateDom();
@@ -119,7 +130,7 @@ Module.register("MMM-cryptocurrency", {
      * @param apiResult
      * @returns {Array}
      */
-    getWantedCurrencies: function (chosenCurrencies, apiResult) {
+    getWantedCurrencies: function(chosenCurrencies, apiResult) {
         var filteredCurrencies = [];
         for (var i = 0; i < chosenCurrencies.length; i++) {
             for (var j = 0; j < apiResult.length; j++) {
@@ -141,15 +152,15 @@ Module.register("MMM-cryptocurrency", {
      * @param apiResult
      * @returns {*}
      */
-    formatPrice: function (apiResult) {
+    formatPrice: function(apiResult) {
         var rightCurrencyFormat = this.config.conversion.toLowerCase();
-        
+
         // rounding the price
         var unroundedPrice = apiResult['price_' + rightCurrencyFormat];
         var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length;
         var requiredDigitsAfterDecimalPoint = Math.max(this.config.significantDigits - digitsBeforeDecimalPoint, 2);
         var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint);
-        
+
         // add the currency string
         apiResult['price'] = price + ' ' + this.config.conversion;
 
@@ -163,7 +174,7 @@ Module.register("MMM-cryptocurrency", {
      * @param precision
      * @returns {number}
      */
-    roundNumber: function (number, precision) {
+    roundNumber: function(number, precision) {
         var factor = Math.pow(10, precision);
         var tempNumber = number * factor;
         var roundedTempNumber = Math.round(tempNumber);
@@ -176,7 +187,7 @@ Module.register("MMM-cryptocurrency", {
      * @param apiResult
      * @returns {Element}
      */
-    buildIconView: function (apiResult) {
+    buildIconView: function(apiResult) {
         var wrapper = document.createElement('div');
         var header = document.createElement('header');
         header.className = 'module-header';
@@ -198,13 +209,17 @@ Module.register("MMM-cryptocurrency", {
             if (this.imageExists(apiResult[j].id)) {
                 var logo = new Image();
 
-                logo.src = '/MMM-cryptocurrency/'+ this.folder + apiResult[j].id + '.png';
+                logo.src = '/MMM-cryptocurrency/' + this.folder + apiResult[j].id + '.png';
                 logo.setAttribute('width', '50px');
                 logo.setAttribute('height', '50px');
                 logoWrapper.appendChild(logo);
             } else {
-                this.sendNotification('SHOW_ALERT', {timer: 5000, title:'MMM-cryptocurrency', message:'' +
-                this.translate("IMAGE")+' '+apiResult[j].id+'.png '+this.translate("NOTFOUND")+' /MMM-cryptocurrency/public/'+this.folder});
+                this.sendNotification('SHOW_ALERT', {
+                    timer: 5000,
+                    title: 'MMM-cryptocurrency',
+                    message: '' +
+                        this.translate("IMAGE") + ' ' + apiResult[j].id + '.png ' + this.translate("NOTFOUND") + ' /MMM-cryptocurrency/public/' + this.folder
+                });
             }
 
             var priceWrapper = document.createElement('td');
@@ -241,8 +256,8 @@ Module.register("MMM-cryptocurrency", {
      * @param currencyName
      * @returns {boolean}
      */
-    imageExists: function (currencyName) {
-        var imgPath = '/MMM-cryptocurrency/'+ this.folder + currencyName + '.png';
+    imageExists: function(currencyName) {
+        var imgPath = '/MMM-cryptocurrency/' + this.folder + currencyName + '.png';
         var http = new XMLHttpRequest();
         http.open('HEAD', imgPath, false);
         http.send();
@@ -253,7 +268,7 @@ Module.register("MMM-cryptocurrency", {
      * Load translations files
      * @returns {{en: string, de: string, it: string}}
      */
-    getTranslations: function () {
+    getTranslations: function() {
         return {
             en: "translations/en.json",
             de: "translations/de.json",
