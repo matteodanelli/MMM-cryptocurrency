@@ -65,13 +65,13 @@ Module.register("MMM-cryptocurrency", {
             this.translate("CURRENCY"),
             this.translate('PRICE')
         ];
-        if (this.config.headers.includes('change1h')) {
+        if (this.config.headers.indexOf('change1h') > -1) {
             tableHeaderValues.push(this.translate('CHANGE') + ' (1h)');
         }
-        if (this.config.headers.includes('change24h')) {
+        if (this.config.headers.indexOf('change24h') > -1) {
             tableHeaderValues.push(this.translate('CHANGE') + ' (24h)');
         }
-        if (this.config.headers.includes('change7d')) {
+        if (this.config.headers.indexOf('change7d') > -1) {
             tableHeaderValues.push(this.translate('CHANGE') + ' (7d)');
         }
         for (var i = 0; i < tableHeaderValues.length; i++) {
@@ -96,13 +96,13 @@ Module.register("MMM-cryptocurrency", {
                 name,
                 currentCurrency.price,
             ];
-            if (this.config.headers.includes('change1h')) {
+            if (this.config.headers.indexOf('change1h') > -1) {
                 tdValues.push(currentCurrency.percent_change_1h + '%');
             }
-            if (this.config.headers.includes('change24h')) {
+            if (this.config.headers.indexOf('change24h') > -1) {
                 tdValues.push(currentCurrency.percent_change_24h + '%');
             }
-            if (this.config.headers.includes('change7d')) {
+            if (this.config.headers.indexOf('change7d') > -1) {
                 tdValues.push(currentCurrency.percent_change_7d + '%');
             }
 
