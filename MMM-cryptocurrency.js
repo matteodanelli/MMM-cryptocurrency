@@ -33,9 +33,7 @@ Module.register("MMM-cryptocurrency", {
 
     getTicker: function() {
         var conversion = this.config.conversion;
-
-        // increase the limit at the end to choose from more currencies
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=25';
+        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=100';
         this.sendSocketNotification('get_ticker', url);
     },
 
