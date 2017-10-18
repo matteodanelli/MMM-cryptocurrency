@@ -59,6 +59,7 @@ Logo provided only for the following currencies:
 - Ripple
 - Stratis
 - Nem
+- Litecoin
 
 Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
 - Add `'litecoin'` to the currency module config
