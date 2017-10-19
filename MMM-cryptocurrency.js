@@ -232,17 +232,17 @@ Module.register("MMM-cryptocurrency", {
                 change_1h.style.color = this.colorizeChange(apiResult[j].percent_change_1h);
                 change_1h.style.fontSize = "small";
                 change_1h.style.display = 'inline';
-                change_1h.innerHTML = ' 1h: ' + apiResult[j].percent_change_1h + '%';
+                change_1h.innerHTML = ' h: ' + apiResult[j].percent_change_1h + '%';
 
                 var change_24h = document.createElement('change_24h');
                 change_24h.style.color = this.colorizeChange(apiResult[j].percent_change_24h);
                 change_24h.style.fontSize = "small";
-                change_24h.innerHTML = '<br> 1d: ' + apiResult[j].percent_change_24h + '%';
+                change_24h.innerHTML = '<br> d: ' + apiResult[j].percent_change_24h + '%';
 
                 var change_7d = document.createElement('change_7d');
                 change_7d.style.color = this.colorizeChange(apiResult[j].percent_change_7d);
                 change_7d.style.fontSize = "small";
-                change_7d.innerHTML = ' 7d: ' + apiResult[j].percent_change_7d + '%';
+                change_7d.innerHTML = ' w: ' + apiResult[j].percent_change_7d + '%';
 
                 priceWrapper.appendChild(change_1h);
                 priceWrapper.appendChild(change_24h);
