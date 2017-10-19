@@ -54,7 +54,7 @@ Here is an example of an entry in `config.js`
 ![Screenshot with logo and graphs](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
 
 #### Display type: logoWithChanges + showGraphs
-![Screenshot with logo changes and graphs](/logoWithChangesAndGraphView.png.png?raw=true "displayType: 'logoWithChanges', showGraphs: 'true'")
+![Screenshot with logo changes and graphs](/logoWithChangesAndGraphView.png?raw=true "displayType: 'logoWithChanges', showGraphs: 'true'")
 
 
 #### Display type: logo + coloredLogos + showGraphs
