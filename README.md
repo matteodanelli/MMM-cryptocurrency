@@ -15,7 +15,7 @@ The entry in `config.js` can include the following options:
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** `string`<br>**Options:** `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
 |`displayLongNames`| Option that show full name of the currency or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
-|`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo`<br/>**Default:** <i>detail</i>
+|`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo, logoWithChanges`<br/>**Default:** <i>detail</i>
 |`logoHeaderText`| Defines the headline text if `displayType: logo` is set.<br/>**Type:** `string`<br>**Default:** <i>Crypto currency</i>
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 |`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>2</i> |
@@ -30,23 +30,32 @@ Here is an example of an entry in `config.js`
 	config: {
 		currency: ['ethereum', 'bitcoin'],
 		conversion: 'USD',
-		headers: ['change24h', 'change1h', 'change7d']
+		headers: ['change24h', 'change1h', 'change7d'],
+		displayType: 'logoWithChanges',
+		showGraphs: true
 	}
 }
 ```
 
 ## Screenshots
 #### Display type: details
-![Screenshot](/MMM-cryptocurrency.png?raw=true "Example screenshot")
+![Screenshot of detail mode](/MMM-cryptocurrency.png?raw=true "Example screenshot")
 
 #### Display type: logo
 ![Screenshot with logo](/logoView.png?raw=true "displayType: 'logo'")
+
+#### Display type: logoWithChanges
+![Screenshot with logo and Changes](/logoWithChangesView.png?raw=true "displayType: 'logoWithChanges'")
 
 #### Display type: logo + significantDigits=5
 ![Screenshot with logo and 5 significant digits](/logoViewWithSignificantDigits.png?raw=true "displayType: 'logo', significantDigits: 5")
 
 #### Display type: logo + showGraphs
-![Screenshot with logo](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
+![Screenshot with logo and graphs](/logoViewWithGraphs.png?raw=true "displayType: 'logo', showGraphs: 'true'")
+
+#### Display type: logoWithChanges + showGraphs
+![Screenshot with logo changes and graphs](/logoWithChangesAndGraphView.png.png?raw=true "displayType: 'logoWithChanges', showGraphs: 'true'")
+
 
 #### Display type: logo + coloredLogos + showGraphs
 ![Screenshot with logo](/logoColoredGraph.png?raw=true "displayType: 'logo', showGraphs: 'true', coloredLogos: true")
@@ -101,6 +110,6 @@ conditions:
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.
 
-**The software is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, 
-fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, 
+**The software is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability,
 whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.**
