@@ -47,9 +47,9 @@ Module.register("MMM-cryptocurrency", {
     },
 
     getDom: function() {
-        if (this.config.displayType == 'logo') {
+        if (this.config.displayType == 'logo' || this.config.displayType == 'logoWithChanges' ) {
             this.folder = (this.config.coloredLogos ? 'colored/' : 'black-white/');
-            return this.buildIconView(this.result);
+            return this.buildIconView(this.result, this.config.displayType);
         }
         var data = this.result;
 
@@ -167,7 +167,7 @@ Module.register("MMM-cryptocurrency", {
 
     /**
      * Rounds a number to a given number of digits after the decimal point
-     * 
+     *
      * @param number
      * @param precision
      * @returns {number}
@@ -183,9 +183,10 @@ Module.register("MMM-cryptocurrency", {
      * Creates the icon view type
      *
      * @param apiResult
+     * @param displayType
      * @returns {Element}
      */
-    buildIconView: function(apiResult) {
+    buildIconView: function(apiResult,displayType) {
         var wrapper = document.createElement('div');
         var header = document.createElement('header');
         header.className = 'module-header';
@@ -221,10 +222,35 @@ Module.register("MMM-cryptocurrency", {
             }
 
             var priceWrapper = document.createElement('td');
-            priceWrapper.className = 'price';
             var price = document.createElement('price');
             price.innerHTML = apiResult[j].price;
             priceWrapper.appendChild(price);
+
+            if (displayType == "logoWithChanges") {
+                priceWrapper.className = 'small price';
+                var change_1h = document.createElement('change_1h');
+                change_1h.style.color = this.colorizeChange(apiResult[j].percent_change_1h);
+                change_1h.style.fontSize = "small";
+                change_1h.style.display = 'inline';
+                change_1h.innerHTML = ' h: ' + apiResult[j].percent_change_1h + '%';
+
+                var change_24h = document.createElement('change_24h');
+                change_24h.style.color = this.colorizeChange(apiResult[j].percent_change_24h);
+                change_24h.style.fontSize = "small";
+                change_24h.innerHTML = '<br> d: ' + apiResult[j].percent_change_24h + '%';
+
+                var change_7d = document.createElement('change_7d');
+                change_7d.style.color = this.colorizeChange(apiResult[j].percent_change_7d);
+                change_7d.style.fontSize = "small";
+                change_7d.innerHTML = ' w: ' + apiResult[j].percent_change_7d + '%';
+
+                priceWrapper.appendChild(change_1h);
+                priceWrapper.appendChild(change_24h);
+                priceWrapper.appendChild(change_7d);
+            }else {
+                priceWrapper.className = 'price';
+            }
+
             tr.appendChild(logoWrapper);
             tr.appendChild(priceWrapper);
 
@@ -260,6 +286,19 @@ Module.register("MMM-cryptocurrency", {
         http.open('HEAD', imgPath, false);
         http.send();
         return http.status != 404;
+    },
+
+    colorizeChange: function(change) {;
+        if (change < 0) {
+            return "Red";
+        }
+        else if ( change > 0)
+        {
+            return "Green";
+        }
+        else {
+            return "White";
+        }
     },
 
     /**
