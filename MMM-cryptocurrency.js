@@ -19,7 +19,8 @@ Module.register('MMM-cryptocurrency', {
     litecoin: 2,
     'ethereum-classic': 1321,
     nem: 873,
-    stratis: 1343
+    stratis: 1343,
+    'bitcoin-cash': 1831
   },
 
   start: function () {
