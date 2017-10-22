@@ -227,26 +227,28 @@ Module.register('MMM-cryptocurrency', {
       priceWrapper.appendChild(price)
 
       if (displayType == 'logoWithChanges') {
-        priceWrapper.className = 'small price'
+        let changesWrapper = document.createElement('div')
         var change_1h = document.createElement('change_1h')
         change_1h.style.color = this.colorizeChange(apiResult[j].percent_change_1h)
-        change_1h.style.fontSize = 'small'
-        change_1h.style.display = 'inline'
-        change_1h.innerHTML = ' h: ' + apiResult[j].percent_change_1h + '%'
+        change_1h.style.fontSize = 'medium'
+        change_1h.innerHTML = 'h: ' + apiResult[j].percent_change_1h + '%'
+        change_1h.style.marginRight = '12px'
 
         var change_24h = document.createElement('change_24h')
         change_24h.style.color = this.colorizeChange(apiResult[j].percent_change_24h)
-        change_24h.style.fontSize = 'small'
-        change_24h.innerHTML = '<br> d: ' + apiResult[j].percent_change_24h + '%'
+        change_24h.style.fontSize = 'medium'
+        change_24h.innerHTML = 'd: ' + apiResult[j].percent_change_24h + '%'
+        change_24h.style.marginRight = '12px'
 
         var change_7d = document.createElement('change_7d')
         change_7d.style.color = this.colorizeChange(apiResult[j].percent_change_7d)
-        change_7d.style.fontSize = 'small'
-        change_7d.innerHTML = ' w: ' + apiResult[j].percent_change_7d + '%'
+        change_7d.style.fontSize = 'medium'
+        change_7d.innerHTML = 'w: ' + apiResult[j].percent_change_7d + '%'
 
-        priceWrapper.appendChild(change_1h)
-        priceWrapper.appendChild(change_24h)
-        priceWrapper.appendChild(change_7d)
+        changesWrapper.appendChild(change_1h)
+        changesWrapper.appendChild(change_24h)
+        changesWrapper.appendChild(change_7d)
+        priceWrapper.appendChild(changesWrapper)
       } else {
         priceWrapper.className = 'price'
       }
