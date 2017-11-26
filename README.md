@@ -7,7 +7,8 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 
 
 ## Config
-The entry in `config.js` can include the following options:
+
+
 |Option|Description|
 |---|---|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Options:** `bitcoin, ethereum, ripple, litecoin, ethereum-classic, nem, stratis, bitcoin-cash`<br>**Default:** <i>['bitcoin']</i>|
