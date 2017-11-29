@@ -20,7 +20,14 @@ Module.register('MMM-cryptocurrency', {
     'ethereum-classic': 1321,
     nem: 873,
     stratis: 1343,
-    'bitcoin-cash': 1831
+    'bitcoin-cash': 1831,
+    'bitcoin-gold':1027,
+    cardano:2010,
+    dash:131,
+    eos:1765,
+    monero:328,
+    neo:1376,
+    stellar:512
   },
 
   start: function () {
@@ -224,7 +231,7 @@ Module.register('MMM-cryptocurrency', {
 
       var priceWrapper = document.createElement('td')
       var price = document.createElement('price')
-      price.innerHTML = apiResult[j].price
+      price.innerHTML = apiResult[j].price.replace("EUR","€")
       priceWrapper.appendChild(price)
 
       if (displayType == 'logoWithChanges') {
