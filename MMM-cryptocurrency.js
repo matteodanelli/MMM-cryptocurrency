@@ -22,7 +22,7 @@ Module.register('MMM-cryptocurrency', {
     nem: 873,
     stratis: 1343,
     'bitcoin-cash': 1831,
-    'bitcoin-gold':1027,
+    'bitcoin-gold':2083,
     cardano:2010,
     dash:131,
     eos:1765,
@@ -241,7 +241,7 @@ Module.register('MMM-cryptocurrency', {
 
       var priceWrapper = document.createElement('td')
       var price = document.createElement('price')
-      price.style.fontSize = 'x-large'
+      price.style.fontSize = 'large'
       price.innerHTML = apiResult[j].price.replace("EUR","€")
 
       priceWrapper.appendChild(price)
