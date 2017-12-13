@@ -3,6 +3,7 @@ Module.register('MMM-cryptocurrency', {
   defaults: {
     currency: ['bitcoin'],
     conversion: 'USD',
+    showUSD: false,
     displayLongNames: false,
     headers: [],
     displayTpe: 'detail',
@@ -20,7 +21,14 @@ Module.register('MMM-cryptocurrency', {
     'ethereum-classic': 1321,
     nem: 873,
     stratis: 1343,
-    'bitcoin-cash': 1831
+    'bitcoin-cash': 1831,
+    'bitcoin-gold':2083,
+    cardano:2010,
+    dash:131,
+    eos:1765,
+    monero:328,
+    neo:1376,
+    stellar:512
   },
 
   start: function () {
@@ -154,14 +162,23 @@ Module.register('MMM-cryptocurrency', {
   formatPrice: function (apiResult) {
     var rightCurrencyFormat = this.config.conversion.toLowerCase()
 
-    // rounding the price
+    // rounding the price in Conversion
     var unroundedPrice = apiResult['price_' + rightCurrencyFormat]
     var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length
     var requiredDigitsAfterDecimalPoint = Math.max(this.config.significantDigits - digitsBeforeDecimalPoint, 2)
     var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint)
+    console.log("config.language: " + config.language);
 
     // add the currency string
-    apiResult['price'] = price + ' ' + this.config.conversion
+    apiResult['price'] = price.toLocaleString(config.language, {style: 'currency', currency: this.config.conversion})
+    if(rightCurrencyFormat != 'usd' && this.config.showUSD) {
+        // rounding the priceUSD
+        var unroundedPriceUSD = apiResult['price_usd']
+        var digitsBeforeDecimalPointUSD = Math.floor(unroundedPriceUSD).toString().length
+        var requiredDigitsAfterDecimalPointUSD = Math.max(this.config.significantDigits - digitsBeforeDecimalPointUSD, 2)
+        var priceUSD = this.roundNumber(unroundedPriceUSD, requiredDigitsAfterDecimalPointUSD)
+        apiResult['price'] += ' / ' +priceUSD.toLocaleString(config.language, {style: 'currency', currency: 'USD'})
+    }
 
     return apiResult
   },
@@ -224,7 +241,9 @@ Module.register('MMM-cryptocurrency', {
 
       var priceWrapper = document.createElement('td')
       var price = document.createElement('price')
-      price.innerHTML = apiResult[j].price
+      price.style.fontSize = 'large'
+      price.innerHTML = apiResult[j].price.replace("EUR","€")
+
       priceWrapper.appendChild(price)
 
       if (displayType == 'logoWithChanges') {
