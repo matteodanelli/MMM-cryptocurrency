@@ -21,6 +21,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>2</i> |
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
+|`fontSize`| Dimension of price text. You can specify pixel values, em values or keywords.<br> **Type:** `string` <br>**Options:** `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`<br/> <br> **Default** <i>xx-large</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -30,7 +31,7 @@ Here is an example of an entry in `config.js`
 	config: {
 		currency: ['ethereum', 'bitcoin'],
 		conversion: 'EUR',
-		showUSD: true,
+		showUSD: false,
 		headers: ['change24h', 'change1h', 'change7d'],
 		displayType: 'logoWithChanges',
 		showGraphs: true
