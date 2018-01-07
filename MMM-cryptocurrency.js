@@ -29,7 +29,10 @@ Module.register('MMM-cryptocurrency', {
         eos: 1765,
         monero: 328,
         neo: 1376,
-        stellar: 512
+        stellar: 512,
+        iota: 1720,
+        tron: 1958,
+        qtum: 1684
     },
 
     start: function() {
