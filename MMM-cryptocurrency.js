@@ -119,7 +119,12 @@ Module.register('MMM-cryptocurrency', {
 
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement('td')
-                tdWrapper.innerHTML = tdValues[j]
+                let currValue = tdValues[j]
+                // If I am showing value then set color
+                if (currValue.includes('%')) {
+                    tdWrapper.style.color = this.colorizeChange(currValue.slice(0,-1))
+                }
+                tdWrapper.innerHTML = currValue
                 trWrapper.appendChild(tdWrapper)
             }
             wrapper.appendChild(trWrapper)
