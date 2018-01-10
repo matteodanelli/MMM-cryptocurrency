@@ -6,7 +6,7 @@ Module.register('MMM-cryptocurrency', {
         showUSD: false,
         displayLongNames: false,
         headers: [],
-        displayTpe: 'detail',
+        displayType: 'detail',
         showGraphs: false,
         logoHeaderText: 'Crypto currency',
         significantDigits: 2,
