@@ -11,7 +11,8 @@ Module.register('MMM-cryptocurrency', {
         logoHeaderText: 'Crypto currency',
         significantDigits: 2,
         coloredLogos: false,
-        fontSize: 'xx-large'
+        fontSize: 'xx-large',
+        limit: '100'
     },
 
     sparklineIds: {
@@ -32,7 +33,8 @@ Module.register('MMM-cryptocurrency', {
         stellar: 512,
         iota: 1720,
         tron: 1958,
-        qtum: 1684
+        qtum: 1684,
+        omisego: 1808
     },
 
     start: function() {
@@ -46,7 +48,7 @@ Module.register('MMM-cryptocurrency', {
 
     getTicker: function() {
         var conversion = this.config.conversion
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=100'
+        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=' + this.config.limit
         this.sendSocketNotification('get_ticker', url)
     },
 

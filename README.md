@@ -22,6 +22,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`fontSize`| Dimension of price text. You can specify pixel values, em values or keywords.<br> **Type:** `string` <br>**Options:** `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large` <br> **Default** <i>xx-large</i> |
+|`limit`| Number of currencies to download, according to CoinMarketCap ranking. Increase this value only if you cannot display a currency. <br> **Type:** `string` <br> **Default** <i>100</i> |
 
 Here is an example of an entry in `config.js`
 ```
