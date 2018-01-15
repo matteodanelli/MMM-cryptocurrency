@@ -34,7 +34,8 @@ Module.register('MMM-cryptocurrency', {
         iota: 1720,
         tron: 1958,
         qtum: 1684,
-        omisego: 1808
+        omisego: 1808,
+        airswap: 2058
     },
 
     start: function() {
