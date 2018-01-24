@@ -59,19 +59,26 @@ Here is an example of an entry in `config.js`
 #### Display type: logoWithChanges + showGraphs
 ![Screenshot with logo changes and graphs](/logoWithChangesAndGraphView.png?raw=true "displayType: 'logoWithChanges', showGraphs: 'true'")
 
-
 #### Display type: logo + coloredLogos + showGraphs
 ![Screenshot with logo](/logoColoredGraph.png?raw=true "displayType: 'logo', showGraphs: 'true', coloredLogos: true")
 
 ## Cryptocurrency Logo
 
 Logo provided only for the following currencies:
-- Bitcoin
-- Ethereum
+- Bitcoin, Bitcoin cash, Bitcoin gold
+- Ethereum, Ethereum classic
 - Ripple
 - Stratis
 - Nem
 - Litecoin
+- Dash
+- Cardano
+- Eos
+- Iota
+- Monero
+- Neo
+- Stellar
+- Tron
 
 Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
 - Add `'litecoin'` to the currency module config
