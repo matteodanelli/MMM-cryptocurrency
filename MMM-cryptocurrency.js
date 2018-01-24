@@ -15,28 +15,7 @@ Module.register('MMM-cryptocurrency', {
         limit: '100'
     },
 
-    sparklineIds: {
-        bitcoin: 1,
-        ethereum: 1027,
-        ripple: 52,
-        litecoin: 2,
-        'ethereum-classic': 1321,
-        nem: 873,
-        stratis: 1343,
-        'bitcoin-cash': 1831,
-        'bitcoin-gold': 2083,
-        cardano: 2010,
-        dash: 131,
-        eos: 1765,
-        monero: 328,
-        neo: 1376,
-        stellar: 512,
-        iota: 1720,
-        tron: 1958,
-        qtum: 1684,
-        omisego: 1808,
-        airswap: 2058
-    },
+    sparklineIds: this.sparklines,
 
     start: function() {
         this.getTicker()
