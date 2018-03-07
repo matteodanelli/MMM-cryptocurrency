@@ -393,7 +393,7 @@ Module.register('MMM-cryptocurrency', {
                 graphWrapper.className = 'graph'
                 if (this.sparklineIds[apiResult[j].id]) {
                     var graph = document.createElement('img')
-                    graph.src = 'https://files.coinmarketcap.com/generated/sparklines/' + this.sparklineIds[apiResult[j].id] + '.png?cachePrevention=' + Math.random()
+                    graph.src = 'https://s2.coinmarketcap.com/generated/sparklines/' + this.sparklineIds[apiResult[j].id] + '.png?cachePrevention=' + Math.random()
                     console.log(graph.src)
                     graphWrapper.appendChild(graph)
                 }
