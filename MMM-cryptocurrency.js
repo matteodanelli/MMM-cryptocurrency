@@ -221,7 +221,7 @@ Module.register('MMM-cryptocurrency', {
 
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement('td')
-                let currValue = tdValues[j]
+                var currValue = tdValues[j]
                 // If I am showing value then set color
                 if (currValue.includes('%')) {
                     tdWrapper.style.color = this.colorizeChange(currValue.slice(0,-1))
@@ -359,7 +359,7 @@ Module.register('MMM-cryptocurrency', {
             priceWrapper.appendChild(price)
 
             if (displayType == 'logoWithChanges') {
-                let changesWrapper = document.createElement('div')
+                var changesWrapper = document.createElement('div')
                 var change_1h = document.createElement('change_1h')
                 change_1h.style.color = this.colorizeChange(apiResult[j].percent_change_1h)
                 change_1h.style.fontSize = 'medium'
