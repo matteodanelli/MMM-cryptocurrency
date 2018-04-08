@@ -281,7 +281,7 @@ Module.register('MMM-cryptocurrency', {
         console.log("config.language: " + config.language);
 
         // add the currency string
-        apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion })
+        apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: this.config.significantDigits })
         if (rightCurrencyFormat != 'usd' && this.config.showUSD) {
             // rounding the priceUSD
             var unroundedPriceUSD = apiResult['price_usd']
