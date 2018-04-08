@@ -30,3 +30,7 @@
     padding-right: 10px;
 }
 
+.mmm-cryptocurrency-icon > tr > td.graph > img {
+    padding-left: 10px;
+    filter: invert(1) grayscale(100%) brightness(500%);
+}
