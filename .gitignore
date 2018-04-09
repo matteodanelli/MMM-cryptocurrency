@@ -62,3 +62,4 @@ typings/
 .idea
 
 \.DS_Store
+/.project
