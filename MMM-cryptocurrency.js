@@ -253,10 +253,10 @@ Module.register('MMM-cryptocurrency', {
         for (var i = 0; i < chosenCurrencies.length; i++) {
             for (var j = 0; j < apiResult.length; j++) {
                 var userCurrency = chosenCurrencies[i]
-                var userCurrencyDigits = this.config.significantDigits[i]
+                var significantDigits = this.config.significantDigits[i]
                 var remoteCurrency = apiResult[j]
                 if (userCurrency == remoteCurrency.id) {
-                    remoteCurrency = this.formatPrice(remoteCurrency,userCurrencyDigits)
+                    remoteCurrency = this.formatPrice(remoteCurrency,significantDigits)
                     filteredCurrencies.push(remoteCurrency)
                 }
             }
