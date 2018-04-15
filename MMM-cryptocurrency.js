@@ -16,29 +16,10 @@ Module.register('MMM-cryptocurrency', {
     },
 
     sparklineIds: {
-        bitcoin: 1,
-        ethereum: 1027,
-        ripple: 52,
-        litecoin: 2,
-        'ethereum-classic': 1321,
-        nem: 873,
-        stratis: 1343,
-        'bitcoin-cash': 1831,
-        'bitcoin-gold': 2083,
-        cardano: 2010,
-        dash: 131,
-        eos: 1765,
-        monero: 328,
-        neo: 1376,
-        stellar: 512,
-        iota: 1720,
-        tron: 1958,
-        qtum: 1684,
-        omisego: 1808,
-        airswap: 2058,  
         aelf: 2299,
         aeternity: 1700,
         aion: 2062,
+        airswap: 2058,
         ardor: 1320,
         ark: 1586,
         augur: 1104,
@@ -278,7 +259,6 @@ Module.register('MMM-cryptocurrency', {
         var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length
         var requiredDigitsAfterDecimalPoint = Math.max(this.config.significantDigits - digitsBeforeDecimalPoint, 2)
         var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint)
-        console.log("config.language: " + config.language);
 
         // add the currency string
         apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: this.config.significantDigits })
