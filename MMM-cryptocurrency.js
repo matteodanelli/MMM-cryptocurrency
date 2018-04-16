@@ -9,7 +9,7 @@ Module.register('MMM-cryptocurrency', {
         displayType: 'detail',
         showGraphs: false,
         logoHeaderText: 'Crypto currency',
-        significantDigits: 2,
+        significantDigits: [2],
         coloredLogos: false,
         fontSize: 'xx-large',
         limit: '100'
@@ -234,9 +234,10 @@ Module.register('MMM-cryptocurrency', {
         for (var i = 0; i < chosenCurrencies.length; i++) {
             for (var j = 0; j < apiResult.length; j++) {
                 var userCurrency = chosenCurrencies[i]
+                var significantDigits = this.config.significantDigits[i]
                 var remoteCurrency = apiResult[j]
                 if (userCurrency == remoteCurrency.id) {
-                    remoteCurrency = this.formatPrice(remoteCurrency)
+                    remoteCurrency = this.formatPrice(remoteCurrency,significantDigits)
                     filteredCurrencies.push(remoteCurrency)
                 }
             }
@@ -251,22 +252,22 @@ Module.register('MMM-cryptocurrency', {
      * @param apiResult
      * @returns {*}
      */
-    formatPrice: function(apiResult) {
+    formatPrice: function(apiResult,significantDigits) {
         var rightCurrencyFormat = this.config.conversion.toLowerCase()
 
         // rounding the price in Conversion
         var unroundedPrice = apiResult['price_' + rightCurrencyFormat]
         var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length
-        var requiredDigitsAfterDecimalPoint = Math.max(this.config.significantDigits - digitsBeforeDecimalPoint, 2)
+        var requiredDigitsAfterDecimalPoint = Math.max(significantDigits - digitsBeforeDecimalPoint, 2)
         var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint)
 
         // add the currency string
-        apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: this.config.significantDigits })
+        apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: significantDigits })
         if (rightCurrencyFormat != 'usd' && this.config.showUSD) {
             // rounding the priceUSD
             var unroundedPriceUSD = apiResult['price_usd']
             var digitsBeforeDecimalPointUSD = Math.floor(unroundedPriceUSD).toString().length
-            var requiredDigitsAfterDecimalPointUSD = Math.max(this.config.significantDigits - digitsBeforeDecimalPointUSD, 2)
+            var requiredDigitsAfterDecimalPointUSD = Math.max(significantDigits - digitsBeforeDecimalPointUSD, 2)
             var priceUSD = this.roundNumber(unroundedPriceUSD, requiredDigitsAfterDecimalPointUSD)
             apiResult['price'] += ' / ' + priceUSD.toLocaleString(config.language, { style: 'currency', currency: 'USD' })
         }
