@@ -235,6 +235,12 @@ Module.register('MMM-cryptocurrency', {
             for (var j = 0; j < apiResult.length; j++) {
                 var userCurrency = chosenCurrencies[i]
                 var significantDigits = this.config.significantDigits[i]
+
+                // fallback if significantDigits are not set for all currencies
+                if(this.config.significantDigits.length < chosenCurrencies.length){
+                    significantDigits = this.config.significantDigits[0]
+                }
+                
                 var remoteCurrency = apiResult[j]
                 if (userCurrency == remoteCurrency.id) {
                     remoteCurrency = this.formatPrice(remoteCurrency,significantDigits)
