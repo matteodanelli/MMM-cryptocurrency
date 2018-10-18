@@ -428,7 +428,8 @@ Module.register('MMM-cryptocurrency', {
         return {
             en: 'translations/en.json',
             de: 'translations/de.json',
-            it: 'translations/it.json'
+            it: 'translations/it.json',
+            sv: 'translations/sv.json'
         }
     },
 
