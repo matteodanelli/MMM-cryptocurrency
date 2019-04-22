@@ -37,6 +37,7 @@ Module.register('MMM-cryptocurrency', {
         chainlink: 1975,
         cindicator: 2043,
         cryptonex: 2027,
+        clams: 460,
         dash: 131,
         decred: 1168,
         dent: 1886,
@@ -128,9 +129,9 @@ Module.register('MMM-cryptocurrency', {
     },
 
     getTicker: function() {
-        var conversion = this.config.conversion
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=' + this.config.limit
-        this.sendSocketNotification('get_ticker', url)
+        var conversion = this.config.conversion;
+        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
+        this.sendSocketNotification('get_ticker', url);
     },
 
     scheduleUpdate: function() {
@@ -232,7 +233,7 @@ Module.register('MMM-cryptocurrency', {
     getWantedCurrencies: function(chosenCurrencies, apiResult) {
         var filteredCurrencies = []
         for (var i = 0; i < chosenCurrencies.length; i++) {
-            for (var j = 0; j < apiResult.length; j++) {
+            for (var j = 0; j < apiResult.data.length; j++) {
                 var userCurrency = chosenCurrencies[i]
                 var significantDigits = this.config.significantDigits[i]
 
@@ -262,7 +263,7 @@ Module.register('MMM-cryptocurrency', {
         var rightCurrencyFormat = this.config.conversion.toLowerCase()
 
         // rounding the price in Conversion
-        var unroundedPrice = apiResult['price_' + rightCurrencyFormat]
+        var unroundedPrice = apiResult['quote'][rightCurrencyFormat][price]
         var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length
         var requiredDigitsAfterDecimalPoint = Math.max(significantDigits - digitsBeforeDecimalPoint, 2)
         var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint)
@@ -271,7 +272,7 @@ Module.register('MMM-cryptocurrency', {
         apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: significantDigits })
         if (rightCurrencyFormat != 'usd' && this.config.showUSD) {
             // rounding the priceUSD
-            var unroundedPriceUSD = apiResult['price_usd']
+            var unroundedPriceUSD = apiResult['quote'][rightCurrencyFormat][price]
             var digitsBeforeDecimalPointUSD = Math.floor(unroundedPriceUSD).toString().length
             var requiredDigitsAfterDecimalPointUSD = Math.max(significantDigits - digitsBeforeDecimalPointUSD, 2)
             var priceUSD = this.roundNumber(unroundedPriceUSD, requiredDigitsAfterDecimalPointUSD)
