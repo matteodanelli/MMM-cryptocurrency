@@ -92,7 +92,7 @@ Module.register('MMM-cryptocurrency', {
         rchain: 2021,
         reddcoin: 118,
         'request-network': 2071,
-        ripple: 52,
+        xrp: 52,
         salt: 1996,
         siacoin: 1042,
         'sirin-labs-token': 2313,
