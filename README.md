@@ -20,7 +20,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |`headers`| Possibility to show currency change in the last hour, day or week. <br> **Type** One of the following: `change1h, change24h, change7d` <br> **Default** <i>None. All optionals.</i> |
 |`significantDigits`|Total digits to use for rounding the price (including before and after decimal point).<br> **Type** `number` <br> **Default** <i>none</i> |
 |`minimumFractionDigits`|Minimum number of digits after the decimal point in the price.<br> **Type** `number` <br> **Default** <i>2</i> |
-|`maximumFractionDigits`|Maximum number of digits after the decimal point in the price.<br> **Type** `number` <br> **Default** <i>2</i> |
+|`maximumFractionDigits`|Maximum number of digits after the decimal point in the price.<br> **Type** `number` <br> **Default** <i>5</i> |
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`fontSize`| Dimension of price text. You can specify pixel values, em values or keywords.<br> **Type:** `string` <br>**Options:** `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large` <br> **Default** <i>xx-large</i> |
