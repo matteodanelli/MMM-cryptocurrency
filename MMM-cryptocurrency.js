@@ -9,7 +9,9 @@ Module.register('MMM-cryptocurrency', {
         displayType: 'detail',
         showGraphs: false,
         logoHeaderText: 'Crypto currency',
-        significantDigits: [2],
+        significantDigits: undefined,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 5,
         coloredLogos: false,
         fontSize: 'xx-large',
         limit: '100'
@@ -234,16 +236,43 @@ Module.register('MMM-cryptocurrency', {
         for (var i = 0; i < chosenCurrencies.length; i++) {
             for (var j = 0; j < apiResult.length; j++) {
                 var userCurrency = chosenCurrencies[i]
-                var significantDigits = this.config.significantDigits[i]
 
-                // fallback if significantDigits are not set for all currencies
-                if(this.config.significantDigits.length < chosenCurrencies.length){
+                // Parse our entries for significantDigits / minimumFractionDigits / maximumFractionDigits
+                // Logic for all 3 is the same
+
+                var significantDigits = undefined
+                if(!Array.isArray(this.config.significantDigits)){
+                    // Not an array, so take value as written
+                    significantDigits = this.config.significantDigits
+                } else if(this.config.significantDigits.length < chosenCurrencies.length){
+                    // Array isn't long enough, so take first entry
                     significantDigits = this.config.significantDigits[0]
+                } else {
+                    // Array looks right, so take relevant entry
+                    significantDigits = this.config.significantDigits[i]
                 }
-                
+
+                var minimumFractionDigits = undefined
+                if(!Array.isArray(this.config.minimumFractionDigits)){
+                    minimumFractionDigits = this.config.minimumFractionDigits
+                } else if(this.config.minimumFractionDigits.length < chosenCurrencies.length){
+                    minimumFractionDigits = this.config.minimumFractionDigits[0]
+                } else {
+                    minimumFractionDigits = this.config.minimumFractionDigits[i]
+                }
+
+                var maximumFractionDigits = undefined
+                if(!Array.isArray(this.config.maximumFractionDigits)){
+                    maximumFractionDigits = this.config.maximumFractionDigits
+                } else if(this.config.maximumFractionDigits.length < chosenCurrencies.length){
+                    maximumFractionDigits = this.config.maximumFractionDigits[0]
+                } else {
+                    maximumFractionDigits = this.config.maximumFractionDigits[i]
+                }
+
                 var remoteCurrency = apiResult[j]
                 if (userCurrency == remoteCurrency.id) {
-                    remoteCurrency = this.formatPrice(remoteCurrency,significantDigits)
+                    remoteCurrency = this.formatPrice(remoteCurrency,significantDigits,minimumFractionDigits,maximumFractionDigits)
                     filteredCurrencies.push(remoteCurrency)
                 }
             }
@@ -256,26 +285,39 @@ Module.register('MMM-cryptocurrency', {
      * instead of price_eur
      *
      * @param apiResult
+     * @param significantDigits - Number of digits to round to
+     * @param minimumFractionDigits - Minimum number of digits after the decimal point
+     * @param maximumFractionDigits - Maximum number of digits after the decimal point
      * @returns {*}
      */
-    formatPrice: function(apiResult,significantDigits) {
+    formatPrice: function(apiResult,significantDigits,minimumFractionDigits,maximumFractionDigits) {
         var rightCurrencyFormat = this.config.conversion.toLowerCase()
 
-        // rounding the price in Conversion
-        var unroundedPrice = apiResult['price_' + rightCurrencyFormat]
-        var digitsBeforeDecimalPoint = Math.floor(unroundedPrice).toString().length
-        var requiredDigitsAfterDecimalPoint = Math.max(significantDigits - digitsBeforeDecimalPoint, 2)
-        var price = this.roundNumber(unroundedPrice, requiredDigitsAfterDecimalPoint)
+        var options = {
+            style: 'currency'
+        }
+
+        if(significantDigits != undefined) {
+            options['maximumSignificantDigits'] = significantDigits
+        }
+
+        if(maximumFractionDigits != undefined) {
+            options['maximumFractionDigits'] = maximumFractionDigits
+        }
+
+        if(minimumFractionDigits != undefined) {
+            options['minimumFractionDigits'] = minimumFractionDigits
+        }
 
         // add the currency string
-        apiResult['price'] = price.toLocaleString(config.language, { style: 'currency', currency: this.config.conversion, maximumSignificantDigits: significantDigits })
+        options['currency'] = this.config.conversion
+        apiResult['price'] = parseFloat(apiResult['price_' + rightCurrencyFormat]).toLocaleString(this.config.language, options)
+
         if (rightCurrencyFormat != 'usd' && this.config.showUSD) {
-            // rounding the priceUSD
-            var unroundedPriceUSD = apiResult['price_usd']
-            var digitsBeforeDecimalPointUSD = Math.floor(unroundedPriceUSD).toString().length
-            var requiredDigitsAfterDecimalPointUSD = Math.max(significantDigits - digitsBeforeDecimalPointUSD, 2)
-            var priceUSD = this.roundNumber(unroundedPriceUSD, requiredDigitsAfterDecimalPointUSD)
-            apiResult['price'] += ' / ' + priceUSD.toLocaleString(config.language, { style: 'currency', currency: 'USD' })
+            options['currency'] = 'USD'
+            // Force en-US locale here, otherwise we'll get 'US$xx.xx' displayed
+            var priceUSD = parseFloat(apiResult['price_usd']).toLocaleString('en-US', options)
+            apiResult['price'] += ' / ' + priceUSD
         }
 
         return apiResult
