@@ -39,6 +39,7 @@ Module.register('MMM-cryptocurrency', {
         chainlink: 1975,
         cindicator: 2043,
         cryptonex: 2027,
+        clams: 460,
         dash: 131,
         decred: 1168,
         dent: 1886,
@@ -130,9 +131,9 @@ Module.register('MMM-cryptocurrency', {
     },
 
     getTicker: function() {
-        var conversion = this.config.conversion
-        var url = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + conversion + '&limit=' + this.config.limit
-        this.sendSocketNotification('get_ticker', url)
+        var conversion = this.config.conversion;
+        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
+        this.sendSocketNotification('get_ticker', url);
     },
 
     scheduleUpdate: function() {
@@ -150,6 +151,7 @@ Module.register('MMM-cryptocurrency', {
             return this.buildIconView(this.result, this.config.displayType)
         }
         var data = this.result
+        var rightCurrencyFormat = this.config.conversion.toUpperCase()
 
         var wrapper = document.createElement('table')
         wrapper.className = 'small mmm-cryptocurrency'
@@ -193,13 +195,13 @@ Module.register('MMM-cryptocurrency', {
                 currentCurrency.price,
             ]
             if (this.config.headers.indexOf('change1h') > -1) {
-                tdValues.push(currentCurrency.percent_change_1h + '%')
+                tdValues.push(currentCurrency.quote[rightCurrencyFormat].percent_change_1h + '%')
             }
             if (this.config.headers.indexOf('change24h') > -1) {
-                tdValues.push(currentCurrency.percent_change_24h + '%')
+                tdValues.push(currentCurrency.quote[rightCurrencyFormat].percent_change_24h + '%')
             }
             if (this.config.headers.indexOf('change7d') > -1) {
-                tdValues.push(currentCurrency.percent_change_7d + '%')
+                tdValues.push(currentCurrency.quote[rightCurrencyFormat].percent_change_7d + '%')
             }
 
             for (var j = 0; j < tdValues.length; j++) {
@@ -234,7 +236,7 @@ Module.register('MMM-cryptocurrency', {
     getWantedCurrencies: function(chosenCurrencies, apiResult) {
         var filteredCurrencies = []
         for (var i = 0; i < chosenCurrencies.length; i++) {
-            for (var j = 0; j < apiResult.length; j++) {
+            for (var j = 0; j < apiResult.data.length; j++) {
                 var userCurrency = chosenCurrencies[i]
 
                 // Parse our entries for significantDigits / minimumFractionDigits / maximumFractionDigits
@@ -270,8 +272,8 @@ Module.register('MMM-cryptocurrency', {
                     maximumFractionDigits = this.config.maximumFractionDigits[i]
                 }
 
-                var remoteCurrency = apiResult[j]
-                if (userCurrency == remoteCurrency.id) {
+                var remoteCurrency = apiResult['data'][j]
+                if (userCurrency == remoteCurrency.slug) {
                     remoteCurrency = this.formatPrice(remoteCurrency,significantDigits,minimumFractionDigits,maximumFractionDigits)
                     filteredCurrencies.push(remoteCurrency)
                 }
@@ -291,7 +293,7 @@ Module.register('MMM-cryptocurrency', {
      * @returns {*}
      */
     formatPrice: function(apiResult,significantDigits,minimumFractionDigits,maximumFractionDigits) {
-        var rightCurrencyFormat = this.config.conversion.toLowerCase()
+        var rightCurrencyFormat = this.config.conversion.toUpperCase()
 
         var options = {
             style: 'currency'
@@ -311,14 +313,7 @@ Module.register('MMM-cryptocurrency', {
 
         // add the currency string
         options['currency'] = this.config.conversion
-        apiResult['price'] = parseFloat(apiResult['price_' + rightCurrencyFormat]).toLocaleString(this.config.language, options)
-
-        if (rightCurrencyFormat != 'usd' && this.config.showUSD) {
-            options['currency'] = 'USD'
-            // Force en-US locale here, otherwise we'll get 'US$xx.xx' displayed
-            var priceUSD = parseFloat(apiResult['price_usd']).toLocaleString('en-US', options)
-            apiResult['price'] += ' / ' + priceUSD
-        }
+        apiResult['price'] = parseFloat(apiResult['quote'][rightCurrencyFormat]['price']).toLocaleString(this.config.language, options)
 
         return apiResult
     },
