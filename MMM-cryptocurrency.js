@@ -3,7 +3,6 @@ Module.register('MMM-cryptocurrency', {
     defaults: {
         currency: ['bitcoin'],
         conversion: 'USD',
-        showUSD: false,
         displayLongNames: false,
         headers: [],
         displayType: 'detail',
@@ -132,7 +131,7 @@ Module.register('MMM-cryptocurrency', {
 
     getTicker: function() {
         var conversion = this.config.conversion;
-        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
+        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=' + this.config.limit + '&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
         this.sendSocketNotification('get_ticker', url);
     },
 
