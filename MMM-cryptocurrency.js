@@ -395,10 +395,10 @@ Module.register('MMM-cryptocurrency', {
             var logoWrapper = document.createElement('td')
             logoWrapper.className = 'icon-field'
 
-            if (this.imageExists(apiResult[j].id)) {
+            if (this.imageExists(apiResult[j].slug)) {
                 var logo = new Image()
 
-                logo.src = '/MMM-cryptocurrency/' + this.folder + apiResult[j].id + '.png'
+                logo.src = '/MMM-cryptocurrency/' + this.folder + apiResult[j].slug + '.png'
                 logo.setAttribute('width', '50px')
                 logo.setAttribute('height', '50px')
                 logoWrapper.appendChild(logo)
@@ -407,7 +407,7 @@ Module.register('MMM-cryptocurrency', {
                     timer: 5000,
                     title: 'MMM-cryptocurrency',
                     message: '' +
-                        this.translate('IMAGE') + ' ' + apiResult[j].id + '.png ' + this.translate('NOTFOUND') + ' /MMM-cryptocurrency/public/' + this.folder
+                        this.translate('IMAGE') + ' ' + apiResult[j].slug + '.png ' + this.translate('NOTFOUND') + ' /MMM-cryptocurrency/public/' + this.folder
                 })
             }
 
@@ -421,21 +421,21 @@ Module.register('MMM-cryptocurrency', {
             if (displayType == 'logoWithChanges') {
                 var changesWrapper = document.createElement('div')
                 var change_1h = document.createElement('change_1h')
-                change_1h.style.color = this.colorizeChange(apiResult[j].percent_change_1h)
+                change_1h.style.color = this.colorizeChange(apiResult[j].change1h)
                 change_1h.style.fontSize = 'medium'
-                change_1h.innerHTML = 'h: ' + apiResult[j].percent_change_1h + '%'
+                change_1h.innerHTML = 'h: ' + apiResult[j].change1h
                 change_1h.style.marginRight = '12px'
 
                 var change_24h = document.createElement('change_24h')
-                change_24h.style.color = this.colorizeChange(apiResult[j].percent_change_24h)
+                change_24h.style.color = this.colorizeChange(apiResult[j].change24h)
                 change_24h.style.fontSize = 'medium'
-                change_24h.innerHTML = 'd: ' + apiResult[j].percent_change_24h + '%'
+                change_24h.innerHTML = 'd: ' + apiResult[j].change24h
                 change_24h.style.marginRight = '12px'
 
                 var change_7d = document.createElement('change_7d')
-                change_7d.style.color = this.colorizeChange(apiResult[j].percent_change_7d)
+                change_7d.style.color = this.colorizeChange(apiResult[j].change7d)
                 change_7d.style.fontSize = 'medium'
-                change_7d.innerHTML = 'w: ' + apiResult[j].percent_change_7d + '%'
+                change_7d.innerHTML = 'w: ' + apiResult[j].change7d
 
                 changesWrapper.appendChild(change_1h)
                 changesWrapper.appendChild(change_24h)
@@ -451,9 +451,9 @@ Module.register('MMM-cryptocurrency', {
             if (this.config.showGraphs) {
                 var graphWrapper = document.createElement('td')
                 graphWrapper.className = 'graph'
-                if (this.sparklineIds[apiResult[j].id]) {
+                if (this.sparklineIds[apiResult[j].slug]) {
                     var graph = document.createElement('img')
-                    graph.src = 'https://s2.coinmarketcap.com/generated/sparklines/web/7d/usd/' + this.sparklineIds[apiResult[j].id] + '.png?cachePrevention=' + Math.random()
+                    graph.src = 'https://s2.coinmarketcap.com/generated/sparklines/web/7d/usd/' + this.sparklineIds[apiResult[j].slug] + '.png?cachePrevention=' + Math.random()
                     console.log(graph.src)
                     graphWrapper.appendChild(graph)
                 }
@@ -483,7 +483,7 @@ Module.register('MMM-cryptocurrency', {
     },
 
     colorizeChange: function(change) {
-
+        change = parseFloat(change)
         if (change < 0) {
             return 'Red'
         } else if (change > 0) {
