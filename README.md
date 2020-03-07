@@ -102,7 +102,7 @@ It's my first module here after that I built a MagicMirror. I'm so proud of it a
 ## Contributors
 - <a href="https://github.com/Klizzy/MMM-cryptocurrency">Klizzy</a> for translations and multiple currencies.
 - <a href="https://github.com/olexs/MMM-cryptocurrency">olexs</a> for currencies graphs and significant digits.
-- <a href="https://github.com/mattdy/MMM-cryptocurrency">mattdy</a> for minimum/maximum fraction length on pricing
+- <a href="https://github.com/mattdy/MMM-cryptocurrency">mattdy</a> for minimum/maximum fraction length on pricing, and refactor for new API
 
 
 The MIT License (MIT)
