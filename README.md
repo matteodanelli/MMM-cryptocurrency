@@ -11,7 +11,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 
 |Option|Description|
 |---|---|
-|`apikey`|Your API key from [CoinMarketCap](https://pro.coinmarketcap.com/).<br>**Type:** `string`|
+|`apikey`|MANDATORY: API key from [CoinMarketCap](https://pro.coinmarketcap.com/).<br>**Type:** `string`|
 |`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Options:** `bitcoin, ethereum, xrp, dash, bitcoin-gold, litecoin, iota, ethereum-classic, nem, stratis, bitcoin-cash, cardano, neo`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** `string`<br>**Options:** `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
 |`displayLongNames`| Option that show full name of the currency or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
@@ -32,6 +32,7 @@ Here is an example of an entry in `config.js`
 	module: "MMM-cryptocurrency",
 	position: "top_right",
 	config: {
+		apikey: '1234-5678-9009-8765-4321'
 		currency: ['ethereum', 'bitcoin'],
 		conversion: 'EUR',
 		headers: ['change24h', 'change1h', 'change7d'],
