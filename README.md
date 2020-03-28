@@ -32,7 +32,7 @@ Here is an example of an entry in `config.js`
 	module: "MMM-cryptocurrency",
 	position: "top_right",
 	config: {
-		apikey: '1234-5678-9009-8765-4321'
+		apikey: '1234-5678-9009-8765-4321',
 		currency: ['ethereum', 'bitcoin'],
 		conversion: 'EUR',
 		headers: ['change24h', 'change1h', 'change7d'],
