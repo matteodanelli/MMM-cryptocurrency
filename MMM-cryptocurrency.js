@@ -107,6 +107,7 @@ Module.register('MMM-cryptocurrency', {
         syscoin: 541,
         tenx: 1758,
         tether: 825,
+        tezos: 2011,
         'time-new-bank': 2235,
         tron: 1958,
         vechain: 1904,
