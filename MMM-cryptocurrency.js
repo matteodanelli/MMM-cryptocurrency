@@ -454,7 +454,7 @@ Module.register('MMM-cryptocurrency', {
                 graphWrapper.className = 'graph'
                 if (this.sparklineIds[apiResult[j].slug]) {
                     var graph = document.createElement('img')
-                    graph.src = 'https://s2.coinmarketcap.com/generated/sparklines/web/7d/usd/' + this.sparklineIds[apiResult[j].slug] + '.png?cachePrevention=' + Math.random()
+                    graph.src = 'https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/' + this.sparklineIds[apiResult[j].slug] + '.png?cachePrevention=' + Math.random()
                     console.log(graph.src)
                     graphWrapper.appendChild(graph)
                 }
