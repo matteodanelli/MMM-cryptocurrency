@@ -22,7 +22,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |`minimumFractionDigits`|Minimum number of digits after the decimal point in the price.<br> **Type** `number` <br> **Default** <i>2</i> |
 |`maximumFractionDigits`|Maximum number of digits after the decimal point in the price.<br> **Type** `number` <br> **Default** <i>5</i> |
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
-|`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
+|`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>true</i> |
 |`fontSize`| Dimension of price text. You can specify pixel values, em values or keywords.<br> **Type:** `string` <br>**Options:** `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large` <br> **Default** <i>xx-large</i> |
 |`limit`| Number of currencies to download, according to CoinMarketCap ranking. Increase this value only if you cannot display a currency. <br> **Type:** `string` <br> **Default** <i>100</i> |
 
@@ -81,6 +81,8 @@ Logo provided only for the following currencies:
 - Neo
 - Stellar
 - Tron
+- The graph
+- Polkadot
 
 Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
 - Add `'litecoin'` to the currency module config
@@ -109,7 +111,7 @@ It's my first module here after that I built a MagicMirror. I'm so proud of it a
 The MIT License (MIT)
 =====================
 
-Copyright © 2017 Matteo Danelli
+Copyright © 2021 Matteo Danelli
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

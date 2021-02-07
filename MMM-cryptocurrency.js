@@ -11,7 +11,7 @@ Module.register('MMM-cryptocurrency', {
         significantDigits: undefined,
         minimumFractionDigits: 2,
         maximumFractionDigits: 5,
-        coloredLogos: false,
+        coloredLogos: true,
         fontSize: 'xx-large',
         limit: '100'
     },
@@ -95,6 +95,7 @@ Module.register('MMM-cryptocurrency', {
         reddcoin: 118,
         'request-network': 2071,
         xrp: 52,
+        'polkadot-new': 6636,
         salt: 1996,
         siacoin: 1042,
         'sirin-labs-token': 2313,
@@ -108,6 +109,7 @@ Module.register('MMM-cryptocurrency', {
         tenx: 1758,
         tether: 825,
         tezos: 2011,
+        'the-graph': 6719,
         'time-new-bank': 2235,
         tron: 1958,
         vechain: 1904,
@@ -207,9 +209,9 @@ Module.register('MMM-cryptocurrency', {
             for (var j = 0; j < tdValues.length; j++) {
                 var tdWrapper = document.createElement('td')
                 var currValue = tdValues[j]
-                // If I am showing value then set color
+                    // If I am showing value then set color
                 if (currValue.includes('%')) {
-                    tdWrapper.style.color = this.colorizeChange(currValue.slice(0,-1))
+                    tdWrapper.style.color = this.colorizeChange(currValue.slice(0, -1))
                 }
                 tdWrapper.innerHTML = currValue
                 trWrapper.appendChild(tdWrapper)
@@ -261,10 +263,10 @@ Module.register('MMM-cryptocurrency', {
         var rightCurrencyFormat = this.config.conversion.toUpperCase()
 
         var options = {
-            style: 'currency',
-            currency: this.config.conversion
-        }
-        // TODO: iterate through all quotes and process properly
+                style: 'currency',
+                currency: this.config.conversion
+            }
+            // TODO: iterate through all quotes and process properly
         apiResult['price'] = this.numberToLocale(apiResult['quote'][rightCurrencyFormat]['price'], options)
 
         return apiResult
@@ -302,19 +304,19 @@ Module.register('MMM-cryptocurrency', {
     numberToLocale: function(number, options, language) {
         // Parse our entries for significantDigits / minimumFractionDigits / maximumFractionDigits
         // Logic for all 3 is the same
-        if(options == undefined) {
+        if (options == undefined) {
             options = {}
         }
 
-        if(language == undefined) {
+        if (language == undefined) {
             language = this.config.language
         }
 
         var significantDigits = undefined
-        if(!Array.isArray(this.config.significantDigits)){
+        if (!Array.isArray(this.config.significantDigits)) {
             // Not an array, so take value as written
             significantDigits = this.config.significantDigits
-        } else if(this.config.significantDigits.length < this.config.currency.length){
+        } else if (this.config.significantDigits.length < this.config.currency.length) {
             // Array isn't long enough, so take first entry
             significantDigits = this.config.significantDigits[0]
         } else {
@@ -323,36 +325,36 @@ Module.register('MMM-cryptocurrency', {
         }
 
         var minimumFractionDigits = undefined
-        if(!Array.isArray(this.config.minimumFractionDigits)){
+        if (!Array.isArray(this.config.minimumFractionDigits)) {
             minimumFractionDigits = this.config.minimumFractionDigits
-        } else if(this.config.minimumFractionDigits.length < this.config.currency.length){
+        } else if (this.config.minimumFractionDigits.length < this.config.currency.length) {
             minimumFractionDigits = this.config.minimumFractionDigits[0]
         } else {
             minimumFractionDigits = this.config.minimumFractionDigits[i]
         }
 
         var maximumFractionDigits = undefined
-        if(!Array.isArray(this.config.maximumFractionDigits)){
+        if (!Array.isArray(this.config.maximumFractionDigits)) {
             maximumFractionDigits = this.config.maximumFractionDigits
-        } else if(this.config.maximumFractionDigits.length < this.config.currency.length){
+        } else if (this.config.maximumFractionDigits.length < this.config.currency.length) {
             maximumFractionDigits = this.config.maximumFractionDigits[0]
         } else {
             maximumFractionDigits = this.config.maximumFractionDigits[i]
         }
 
-        if(significantDigits != undefined) {
+        if (significantDigits != undefined) {
             options['maximumSignificantDigits'] = significantDigits
         }
 
-        if(maximumFractionDigits != undefined) {
+        if (maximumFractionDigits != undefined) {
             options['maximumFractionDigits'] = maximumFractionDigits
         }
 
-        if(minimumFractionDigits != undefined) {
+        if (minimumFractionDigits != undefined) {
             options['minimumFractionDigits'] = minimumFractionDigits
         }
 
-        return parseFloat(number).toLocaleString(language,options)
+        return parseFloat(number).toLocaleString(language, options)
     },
 
     /**
@@ -478,7 +480,7 @@ Module.register('MMM-cryptocurrency', {
     imageExists: function(currencyName) {
         var imgPath = '/MMM-cryptocurrency/' + this.folder + currencyName + '.png'
         var http = new XMLHttpRequest()
-        http.open('HEAD', imgPath, false)
+        http.open('HEAD', imgPath)
         http.send()
         return http.status != 404
     },
