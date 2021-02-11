@@ -75,6 +75,7 @@ Module.register('MMM-cryptocurrency', {
         medibloc: 2303,
         monacoin: 213,
         monero: 328,
+        nano: 1567,
         neblio: 1955,
         'nebulas-token': 1908,
         nem: 873,
@@ -457,7 +458,6 @@ Module.register('MMM-cryptocurrency', {
                 if (this.sparklineIds[apiResult[j].slug]) {
                     var graph = document.createElement('img')
                     graph.src = 'https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/' + this.sparklineIds[apiResult[j].slug] + '.png?cachePrevention=' + Math.random()
-                    console.log(graph.src)
                     graphWrapper.appendChild(graph)
                 }
                 tr.appendChild(graphWrapper)
