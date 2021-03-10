@@ -121,7 +121,8 @@ Module.register('MMM-cryptocurrency', {
         wax: 2300,
         zcash: 1437,
         zclassic: 1447,
-        zcoin: 1414
+        zcoin: 1414,
+        zrx: 1896
     },
 
     start: function() {
