@@ -16,7 +16,7 @@ Module.register('MMM-cryptocurrency', {
         limit: '100'
     },
 
-    sparklineIds: { // See setSparklineIds()
+    sparklineIds: {// See setSparklineIds()
     },
 
     start: function() {
@@ -404,7 +404,7 @@ Module.register('MMM-cryptocurrency', {
             sv: 'translations/sv.json'
         }
     },
-
+    
     setSparklineIds: function(){
         this.sparklineIds = {
             'bitcoin': 1,
