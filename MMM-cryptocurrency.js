@@ -13,7 +13,8 @@ Module.register('MMM-cryptocurrency', {
         maximumFractionDigits: 5,
         coloredLogos: true,
         fontSize: 'xx-large',
-        limit: '100'
+        limit: '100',
+        apiDelay: 300000,
     },
 
     sparklineIds: {
@@ -142,8 +143,8 @@ Module.register('MMM-cryptocurrency', {
 
     scheduleUpdate: function() {
         var self = this
-            // Refresh time should not be less than 5 minutes
-        var delay = 300000
+        // Refresh time should not be less than 5 minutes
+        var delay = this.config.apiDelay
         setInterval(function() {
             self.getTicker()
         }, delay)
