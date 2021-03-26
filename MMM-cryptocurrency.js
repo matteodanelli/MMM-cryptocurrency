@@ -31,6 +31,7 @@ Module.register('MMM-cryptocurrency', {
         bitcoin: 1,
         'bitcoin-cash': 1831,
         'bitcoin-gold': 2083,
+        'bitcoin-sv': 3602,
         bitshares: 463,
         byteball: 1492,
         'bytecoin-bcn': 372,
