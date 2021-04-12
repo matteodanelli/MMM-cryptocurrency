@@ -108,6 +108,7 @@ Module.register('MMM-cryptocurrency', {
         stellar: 512,
         stratis: 1343,
         substratum: 1984,
+        swissborg: 2499,
         syscoin: 541,
         tenx: 1758,
         tether: 825,
