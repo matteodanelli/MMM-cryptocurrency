@@ -68,7 +68,7 @@ Here is an example of an entry in `config.js`
 ## Cryptocurrency Logo
 
 Logo provided only for the following currencies:
-- Bitcoin, Bitcoin cash, Bitcoin gold
+- Bitcoin, Bitcoin cash, Bitcoin gold, Bitcoin SV
 - Ethereum, Ethereum classic
 - Ripple
 - Stratis
@@ -84,6 +84,12 @@ Logo provided only for the following currencies:
 - Tron
 - The graph
 - Polkadot
+- XRP
+- SwissBorg
+- Nano
+- Lisk
+- Binance Coin
+- Basic Attention Token
 - Dogecoin
 - Shiba Inu
 
