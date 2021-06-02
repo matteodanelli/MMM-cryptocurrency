@@ -73,6 +73,7 @@ Logo provided only for the following currencies:
 - Basic Attention Token
 - Binance Coin
 - Cardano
+- Crypto.com Coin
 - Dash
 - Dogecoin
 - Eos
