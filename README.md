@@ -68,22 +68,31 @@ Here is an example of an entry in `config.js`
 ## Cryptocurrency Logo
 
 Logo provided only for the following currencies:
-- Bitcoin, Bitcoin cash, Bitcoin gold
+- Bitcoin, Bitcoin cash, Bitcoin gold, Bitcoin SV
 - Ethereum, Ethereum classic
-- Ripple
-- Stratis
-- Nem
-- Litecoin
-- Dash
+- Basic Attention Token
+- Binance Coin
 - Cardano
+- Crypto.com Coin
+- Dash
+- Dogecoin
 - Eos
 - Iota
+- Lisk
+- Litecoin
 - Monero
+- Nano
+- Nem
 - Neo
-- Stellar
-- Tron
-- The graph
 - Polkadot
+- Ripple
+- Shiba Inu
+- Stellar
+- Stratis
+- SwissBorg
+- The graph
+- Tron
+- XRP
 
 Feel free to ask for support of your favorite currency. Else, just implement it (eg: to add Litecoin logo):
 - Add `'litecoin'` to the currency module config
