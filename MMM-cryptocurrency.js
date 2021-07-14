@@ -125,7 +125,10 @@ Module.register('MMM-cryptocurrency', {
         zcash: 1437,
         zclassic: 1447,
         zcoin: 1414,
-        '0x': 1896
+        '0x': 1896,
+        'polygon': 3890,
+        'cosmos': 3794,
+        'chainlink': 1975
     },
 
     start: function() {
