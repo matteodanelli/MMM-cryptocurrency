@@ -118,7 +118,7 @@ Module.register('MMM-cryptocurrency', {
         'the-graph': 6719,
         'time-new-bank': 2235,
         tron: 1958,
-        vechain: 1904,
+        vechain: 3077,
         verge: 693,
         veritaseum: 1710,
         walton: 1925,
