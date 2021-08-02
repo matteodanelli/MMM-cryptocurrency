@@ -11,8 +11,10 @@
     padding-bottom: 5px;
 }
 
-.mmm-cryptocurrency-icon > tr > td > img, span{
-    vertical-align: middle;
+.mmm-cryptocurrency-icon > tr > td {
+  img, span {
+     vertical-align: middle;
+  }
 }
 .mmm-cryptocurrency-icon > tr > td {
     padding-bottom: 10px;
