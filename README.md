@@ -1,6 +1,6 @@
 
 
-> The NPM module "Request" was removed with Magicmirror `v2.15` This has
+> The NPM module "Request" was removed with Magicmirror `v2.16` This has
 > led to the fact that Magicmirror can no longer be started under
 > Docker, for example. With this fork, the deprecated npm module
 > "Request" is installed locally in the module's directory.
