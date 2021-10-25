@@ -1,5 +1,5 @@
 var NodeHelper = require('node_helper')
-var request = require('request')
+const fetch = require('node-fetch');
 
 module.exports = NodeHelper.create({
   start: function () {
@@ -14,11 +14,13 @@ module.exports = NodeHelper.create({
 
   getTickers: function (url) {
     var self = this
-    request({url: url, method: 'GET'}, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        self.sendSocketNotification('got_result', JSON.parse(body))
-      }
+    fetch(url)
+      .then(res => res.text())
+      .then(body => {
+        var result = JSON.parse(body)
+        self.sendSocketNotification('got_result', result)
+
     })
-  }
+  }  
 
 })

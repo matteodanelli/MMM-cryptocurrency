@@ -3,7 +3,8 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/matteodanelli/MMM-cryptocurrency.git`.
-2. Add the module inside `config.js` placing it where you prefer ;)
+2. While inside the MMM-cryptocurrency folder, Execute `npm install` to install the dependencies.
+3. Add the module inside `config.js` placing it where you prefer ;)
 
 
 ## Config

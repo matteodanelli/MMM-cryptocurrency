@@ -1,0 +1,23 @@
+{
+    "name": "Magic-Mirror-Cryptocurrency",
+    "version": "1.0.0",
+    "dependencies": {
+      "node-fetch": "^2.6.1"
+    },
+    "description": "A <a href=\"https://github.com/MichMich/MagicMirror\">MagicMirror</a> module used to get real-time values of crypto currencies.",
+    "main": "MMM-cryptocurrency.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/matteodanelli/MMM-cryptocurrency.git"
+    },
+    "author": "matteo danelli",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/matteodanelli/MMM-cryptocurrency/issues"
+    },
+    "homepage": "https://github.com/matteodanelli/MMM-cryptocurrency#readme"
+  }
+  
