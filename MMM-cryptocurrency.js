@@ -13,7 +13,6 @@ Module.register('MMM-cryptocurrency', {
         maximumFractionDigits: 5,
         coloredLogos: true,
         fontSize: 'xx-large',
-        limit: '100',
         apiDelay: 300000,
     },
 
