@@ -144,7 +144,8 @@ Module.register('MMM-cryptocurrency', {
 
     getTicker: function() {
         var conversion = this.config.conversion;
-        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=' + this.config.limit + '&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
+        var slugs = this.config.currency.join(',');
+        var url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?slug=' + slugs + '&convert=' + conversion + '&CMC_PRO_API_KEY=' + this.config.apikey;
         this.sendSocketNotification('get_ticker', url);
     },
 
@@ -247,17 +248,11 @@ Module.register('MMM-cryptocurrency', {
      */
     getWantedCurrencies: function(chosenCurrencies, apiResult) {
         var filteredCurrencies = []
-        for (var i = 0; i < chosenCurrencies.length; i++) {
-            for (var j = 0; j < apiResult.data.length; j++) {
-                var userCurrency = chosenCurrencies[i]
-
-                var remoteCurrency = apiResult['data'][j]
-                if (userCurrency == remoteCurrency.slug) {
-                    remoteCurrency = this.formatPrice(remoteCurrency)
-                    remoteCurrency = this.formatPercentage(remoteCurrency)
-                    filteredCurrencies.push(remoteCurrency)
-                }
-            }
+        for (var symbol in apiResult.data) {
+            var remoteCurrency = apiResult.data[symbol]
+            remoteCurrency = this.formatPrice(remoteCurrency)
+            remoteCurrency = this.formatPercentage(remoteCurrency)
+            filteredCurrencies.push(remoteCurrency)
         }
         return filteredCurrencies
     },
