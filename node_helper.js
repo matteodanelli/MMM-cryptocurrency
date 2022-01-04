@@ -1,24 +1,31 @@
-var NodeHelper = require('node_helper')
-var request = require('request')
+const NodeHelper = require("node_helper");
+const https = require("https");
 
 module.exports = NodeHelper.create({
   start: function () {
-    console.log('Cryptocurrency module loaded!')
+    console.log("MMM-Cryptocurrency loaded!");
   },
 
   socketNotificationReceived: function (notification, payload) {
-    if (notification === 'get_ticker') {
-      this.getTickers(payload)
+    if (notification === "get_ticker") {
+      this.getTickers(payload);
     }
   },
 
   getTickers: function (url) {
-    var self = this
-    request({url: url, method: 'GET'}, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        self.sendSocketNotification('got_result', JSON.parse(body))
-      }
-    })
+    var self = this;
+    https
+      .get(url, (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data = data + chunk.toString();
+        });
+        res.on("end", () => {
+          self.sendSocketNotification("got_result", JSON.parse(data));
+        });
+      })
+      .on("error", (err) => {
+        console.log("MMM-Cryptocurrency error: ", err.message);
+      });
   }
-
-})
+});
