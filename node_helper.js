@@ -12,16 +12,16 @@ module.exports = NodeHelper.create({
     }
   },
 
-  getTickers: function (url) {
+  getTickers: function (payload) {
     var self = this;
     https
-      .get(url, (res) => {
+      .get(payload.url, (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data = data + chunk.toString();
         });
         res.on("end", () => {
-          self.sendSocketNotification("got_result", JSON.parse(data));
+          self.sendSocketNotification("got_result", { id: payload.id, data: JSON.parse(data) });
         });
       })
       .on("error", (err) => {
