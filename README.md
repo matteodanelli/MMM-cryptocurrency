@@ -22,8 +22,8 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |Option|Description|
 |---|---|
 |`apikey`|MANDATORY: API key from [CoinMarketCap](https://pro.coinmarketcap.com/).<br>**Type:** `string`|
-|`apiDelay`|Frequency, in seconds, to updata data values<br>**Type:** `number` <br> **Default** <i>300000</i> |
-|`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Options:** `bitcoin, ethereum, xrp, dash, bitcoin-gold, litecoin, iota, ethereum-classic, nem, stratis, bitcoin-cash, cardano, neo`<br>**Default:** <i>['bitcoin']</i>|
+|`apiDelay`|Frequency, in milliseconds, to updata data values<br>**Type:** `number` <br> **Default** <i>300000</i> |
+|`currency`|One or more currencies you want to display.<br>**Type:** `array`<br>**Options:** `bitcoin, ethereum, xrp, dash, bitcoin-gold, litecoin, iota, ethereum-classic, nem, stratis, bitcoin-cash, cardano, solana, neo, poken`<br>**Default:** <i>['bitcoin']</i>|
 |`conversion`|The currency used to convert crypto currency value.<br>**Type:** `string`<br>**Options:** `AUD, BRL, CAD, CHF, CNY, EUR, GBP, HKD, IDR, INR, JPY, KRW, MXN, RUB`<br>**Default:** <i>USD</i>|
 |`displayLongNames`| Option that show full name of the currency or the shortest version. (eg. Bitcoin/BTC ). <br> **Type** `boolean` <br> **Default** <i>false</i> |
 |`displayType`| Sets the display of the module. <br>**Type:** `string`<br>**Options:** `detail, logo, logoWithChanges`<br/>**Default:** <i>detail</i>
@@ -35,7 +35,6 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 |`showGraphs`| Possibility to show currency graph over the last week in `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>false</i> |
 |`coloredLogos`| Toggles white or colored logos `displayType: logo`. <br> **Type:** `boolean` <br> **Default** <i>true</i> |
 |`fontSize`| Dimension of price text. You can specify pixel values, em values or keywords.<br> **Type:** `string` <br>**Options:** `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large` <br> **Default** <i>xx-large</i> |
-|`limit`| Number of currencies to download, according to CoinMarketCap ranking. Increase this value only if you cannot display a currency. <br> **Type:** `string` <br> **Default** <i>100</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -95,8 +94,10 @@ Logo provided only for the following currencies:
 - Nem
 - Neo
 - Polkadot
+- Poken
 - Ripple
 - Shiba Inu
+- Solana
 - Stellar
 - Stratis
 - SwissBorg
