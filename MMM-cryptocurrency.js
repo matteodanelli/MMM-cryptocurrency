@@ -500,7 +500,7 @@ Module.register("MMM-cryptocurrency", {
           graph.src =
             "https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" +
             this.sparklineIds[apiResult[j].slug] +
-            ".png?cachePrevention=" +
+            ".svg?cachePrevention=" +
             Math.random();
           graphWrapper.appendChild(graph);
         }
