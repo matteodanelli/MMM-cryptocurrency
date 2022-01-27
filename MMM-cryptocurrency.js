@@ -13,7 +13,7 @@ Module.register("MMM-cryptocurrency", {
     maximumFractionDigits: 5,
     coloredLogos: true,
     fontSize: "xx-large",
-    apiDelay: 300000
+    apiDelay: 5
   },
 
   sparklineIds: {
