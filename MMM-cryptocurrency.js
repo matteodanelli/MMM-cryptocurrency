@@ -26,7 +26,7 @@ Module.register("MMM-cryptocurrency", {
     augur: 1104,
     bancor: 1727,
     "basic-attention-token": 1697,
-    "binance-coin": 1839,
+    bnb: 1839,
     bitcoin: 1,
     "bitcoin-cash": 1831,
     "bitcoin-gold": 2083,
