@@ -162,7 +162,7 @@ Module.register("MMM-cryptocurrency", {
     var delay = this.config.apiDelay;
     setInterval(function () {
       self.getTicker();
-    }, delay);
+    }, delay*60*1000);
   },
 
   getDom: function () {
