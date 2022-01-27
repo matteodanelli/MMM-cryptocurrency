@@ -265,11 +265,18 @@ Module.register("MMM-cryptocurrency", {
    */
   getWantedCurrencies: function (chosenCurrencies, apiResult) {
     var filteredCurrencies = [];
-    for (var symbol in apiResult.data) {
-      var remoteCurrency = apiResult.data[symbol];
-      remoteCurrency = this.formatPrice(remoteCurrency);
-      remoteCurrency = this.formatPercentage(remoteCurrency);
-      filteredCurrencies.push(remoteCurrency);
+    for (var i = 0, len = chosenCurrencies.length; i < len; i++)
+    {
+      var userCurrency = chosenCurrencies[i];
+      for (var symbol in apiResult.data) {
+        var remoteCurrency = apiResult.data[symbol];
+        if (remoteCurrency.slug == userCurrency)
+        {
+          remoteCurrency = this.formatPrice(remoteCurrency);
+          remoteCurrency = this.formatPercentage(remoteCurrency);
+          filteredCurrencies.push(remoteCurrency);
+        }
+      }
     }
     return filteredCurrencies;
   },
