@@ -153,7 +153,10 @@ Module.register("MMM-cryptocurrency", {
       conversion +
       "&CMC_PRO_API_KEY=" +
       this.config.apikey;
-    this.sendSocketNotification("get_ticker", { id: this.identifier, url: url });
+    this.sendSocketNotification("get_ticker", {
+      id: this.identifier,
+      url: url
+    });
   },
 
   scheduleUpdate: function () {
@@ -162,7 +165,7 @@ Module.register("MMM-cryptocurrency", {
     var delay = this.config.apiDelay;
     setInterval(function () {
       self.getTicker();
-    }, delay*60*1000);
+    }, delay * 60 * 1000);
   },
 
   getDom: function () {
@@ -242,10 +245,13 @@ Module.register("MMM-cryptocurrency", {
   socketNotificationReceived: function (notification, payload) {
     // if not intended for this instance, ignore it
     if (this.identifier !== payload.id) {
-        return;
+      return;
     }
     if (notification === "got_result") {
-      this.result = this.getWantedCurrencies(this.config.currency, payload.data);
+      this.result = this.getWantedCurrencies(
+        this.config.currency,
+        payload.data
+      );
       this.updateDom();
     }
   },
