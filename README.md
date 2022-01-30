@@ -11,7 +11,7 @@ A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used 
 
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/theskyisthelimit/MMM-cryptocurrency.git`.
-2. Enter the Folder with `cd MMM-homeassistant-sensors`
+2. Enter the Folder with `cd MMM-cryptocurrency`
 3. `npm init` and `npm install request`
 4. Add the module inside `config.js` placing it where you prefer ;)
 
