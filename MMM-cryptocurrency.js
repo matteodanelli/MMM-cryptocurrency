@@ -13,7 +13,7 @@ Module.register("MMM-cryptocurrency", {
     maximumFractionDigits: 5,
     coloredLogos: true,
     fontSize: "xx-large",
-    apiDelay: 300000
+    apiDelay: 5
   },
 
   sparklineIds: {
@@ -26,7 +26,7 @@ Module.register("MMM-cryptocurrency", {
     augur: 1104,
     bancor: 1727,
     "basic-attention-token": 1697,
-    "binance-coin": 1839,
+    bnb: 1839,
     bitcoin: 1,
     "bitcoin-cash": 1831,
     "bitcoin-gold": 2083,
@@ -153,7 +153,10 @@ Module.register("MMM-cryptocurrency", {
       conversion +
       "&CMC_PRO_API_KEY=" +
       this.config.apikey;
-    this.sendSocketNotification("get_ticker", { id: this.identifier, url: url });
+    this.sendSocketNotification("get_ticker", {
+      id: this.identifier,
+      url: url
+    });
   },
 
   scheduleUpdate: function () {
@@ -162,7 +165,7 @@ Module.register("MMM-cryptocurrency", {
     var delay = this.config.apiDelay;
     setInterval(function () {
       self.getTicker();
-    }, delay);
+    }, delay * 60 * 1000);
   },
 
   getDom: function () {
@@ -242,10 +245,13 @@ Module.register("MMM-cryptocurrency", {
   socketNotificationReceived: function (notification, payload) {
     // if not intended for this instance, ignore it
     if (this.identifier !== payload.id) {
-        return;
+      return;
     }
     if (notification === "got_result") {
-      this.result = this.getWantedCurrencies(this.config.currency, payload.data);
+      this.result = this.getWantedCurrencies(
+        this.config.currency,
+        payload.data
+      );
       this.updateDom();
     }
   },
@@ -500,7 +506,7 @@ Module.register("MMM-cryptocurrency", {
           graph.src =
             "https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" +
             this.sparklineIds[apiResult[j].slug] +
-            ".png?cachePrevention=" +
+            ".svg?cachePrevention=" +
             Math.random();
           graphWrapper.appendChild(graph);
         }
