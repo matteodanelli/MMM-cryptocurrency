@@ -100,6 +100,7 @@ Module.register("MMM-cryptocurrency", {
     xrp: 52,
     "polkadot-new": 6636,
     poken: 12692,
+    "multi-collateral-dai": 4943,
     salt: 1996,
     "shiba-inu": 5994,
     siacoin: 1042,
