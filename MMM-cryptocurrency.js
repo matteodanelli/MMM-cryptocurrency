@@ -38,7 +38,7 @@ Module.register("MMM-cryptocurrency", {
     cardano: 2010,
     chainlink: 1975,
     cindicator: 2043,
-    "crypto-com-coin": 3635,
+    cronos: 3635,
     cryptonex: 2027,
     clams: 460,
     dash: 131,
