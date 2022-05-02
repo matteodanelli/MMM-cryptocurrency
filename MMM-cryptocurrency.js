@@ -38,7 +38,7 @@ Module.register("MMM-cryptocurrency", {
     cardano: 2010,
     chainlink: 1975,
     cindicator: 2043,
-    "crypto-com-coin": 3635,
+    cronos: 3635,
     cryptonex: 2027,
     clams: 460,
     dash: 131,
@@ -100,6 +100,7 @@ Module.register("MMM-cryptocurrency", {
     xrp: 52,
     "polkadot-new": 6636,
     poken: 12692,
+    "multi-collateral-dai": 4943,
     salt: 1996,
     "shiba-inu": 5994,
     siacoin: 1042,
@@ -131,7 +132,8 @@ Module.register("MMM-cryptocurrency", {
     "0x": 1896,
     polygon: 3890,
     cosmos: 3794,
-    chainlink: 1975
+    chainlink: 1975,
+    "apeswap-finance": 8497,
   },
 
   start: function () {
