@@ -16,7 +16,7 @@ Module.register("MMM-cryptocurrency", {
     apiDelay: 5
   },
 
-  sparklineIds: {
+  currencyIds: {
     aelf: 2299,
     aeternity: 1700,
     aion: 2062,
@@ -148,10 +148,15 @@ Module.register("MMM-cryptocurrency", {
 
   getTicker: function () {
     var conversion = this.config.conversion;
-    var slugs = this.config.currency.join(",");
+    var currencyIds = [];
+    for (var i = 0, len = this.config.currency.length; i < len; i++) {
+      var slug = this.config.currency[i];
+      currencyIds.push( this.currencyIds[slug] );
+    }
+    var ids = currencyIds.join(",");
     var url =
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?slug=" +
-      slugs +
+      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=" +
+      ids +
       "&convert=" +
       conversion +
       "&CMC_PRO_API_KEY=" +
@@ -268,11 +273,19 @@ Module.register("MMM-cryptocurrency", {
    */
   getWantedCurrencies: function (chosenCurrencies, apiResult) {
     var filteredCurrencies = [];
-    for (var symbol in apiResult.data) {
-      var remoteCurrency = apiResult.data[symbol];
-      remoteCurrency = this.formatPrice(remoteCurrency);
-      remoteCurrency = this.formatPercentage(remoteCurrency);
-      filteredCurrencies.push(remoteCurrency);
+    for (var i = 0, len = chosenCurrencies.length; i < len; i++)
+    {
+      var slug = chosenCurrencies[i];
+      var userCurrencyId = this.currencyIds[ slug ];
+      for (var currencyId in apiResult.data) {
+        var remoteCurrency = apiResult.data[currencyId];
+        if (userCurrencyId == remoteCurrency.id)
+        {
+          remoteCurrency = this.formatPrice(remoteCurrency);
+          remoteCurrency = this.formatPercentage(remoteCurrency);
+          filteredCurrencies.push(remoteCurrency);
+        }
+      }
     }
     return filteredCurrencies;
   },
@@ -504,11 +517,11 @@ Module.register("MMM-cryptocurrency", {
       if (this.config.showGraphs) {
         var graphWrapper = document.createElement("td");
         graphWrapper.className = "graph";
-        if (this.sparklineIds[apiResult[j].slug]) {
+        if (this.currencyIds[apiResult[j].slug]) {
           var graph = document.createElement("img");
           graph.src =
             "https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" +
-            this.sparklineIds[apiResult[j].slug] +
+            this.currencyIds[apiResult[j].slug] +
             ".svg?cachePrevention=" +
             Math.random();
           graphWrapper.appendChild(graph);
