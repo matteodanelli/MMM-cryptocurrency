@@ -72,6 +72,7 @@ Module.register("MMM-cryptocurrency", {
     lisk: 1214,
     litecoin: 2,
     loopring: 1934,
+    'terra-luna': 4172,
     maidsafecoin: 291,
     maker: 1518,
     medibloc: 2303,
