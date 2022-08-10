@@ -1,9 +1,19 @@
+
+
+> The NPM module "Request" was removed with Magicmirror `v2.16` This has
+> led to the fact that Magicmirror can no longer be started under
+> Docker, for example. With this fork, the deprecated npm module
+> "Request" is installed locally in the module's directory.
+
+
 # MMM-cryptocurrency
 A <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module used to get real-time values of crypto currencies.
 
 ## Installation
-1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/matteodanelli/MMM-cryptocurrency.git`.
-2. Add the module inside `config.js` placing it where you prefer ;)
+1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/theskyisthelimit/MMM-cryptocurrency.git`.
+2. Enter the Folder with `cd MMM-cryptocurrency`
+3. `npm init` and `npm install request`
+4. Add the module inside `config.js` placing it where you prefer ;)
 
 
 ## Config
